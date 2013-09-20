@@ -1,4 +1,6 @@
 <?php
+define("_AM_APPROVESUCCESS","Garage Approved.");
+define("_AM_APPROVEFAILURE","There was an error with approving this garage.");
 define("_AM_GARAGES_INDEX", "Index");
 define("_AM_GARAGES_OPTS", "Preferences");
 define("_AM_GARAGES_GOMOD", "Go to module");

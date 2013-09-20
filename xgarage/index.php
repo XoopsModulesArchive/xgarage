@@ -69,46 +69,51 @@ switch ($op){
 		
 
 
-		if($gid){
-			$garage = getGarage($gid);
-			if($garage['imagechoice'] == 1) {
+		if($gid = intval($gid) > 0){
+			
+			$myGarage = xoops_getModuleHandler('garage','garage');
+			$thegarage = $myGarage->getGarage($gid);
+
+			if($thegarage->getVar('imagechoice') == 1) {
 $garage['image'] = "[img align=center]". XOOPS_UPLOAD_URL. "/" . "garage/".$garage['uploadimage']."[/img]";
 		}
-	}
+	}else{
+						redirect_header("index.php",2,'Garage Doesn\'t Exist'); //need a constant for this
+		}
 
 		$myts =& MyTextSanitizer::getInstance(); // MyTextSanitizer object
-		$garage['mengine'] = $myts->displayTarea($garage['mengine'], 1, 1, 1, 1, 1);
-		$garage['mexterior'] = $myts->displayTarea($garage['mexterior'], 1, 1, 1, 1, 1);
-		$garage['minterior'] = $myts->displayTarea($garage['minterior'], 1, 1, 1, 1, 1);
-		$garage['mrims'] = $myts->displayTarea($garage['mrims'], 1, 1, 1, 1, 1);
-		$garage['maudio'] = $myts->displayTarea($garage['maudio'], 1, 1, 1, 1, 1);
-		$garage['mfuture'] = $myts->displayTarea($garage['mfuture'], 1, 1, 1, 1, 1);
-		$garage['descript2'] = $myts->displayTarea($garage['descript2'], 1, 1, 1, 1, 1);
-		if($garage['descript2']){
+		$garage['mengine'] = $myts->displayTarea($thegarage->getVar('mengine'), 1, 1, 1, 1, 1);
+		$garage['mexterior'] = $myts->displayTarea($thegarage->getVar('mexterior'), 1, 1, 1, 1, 1);
+		$garage['minterior'] = $myts->displayTarea($thegarage->getVar('minterior'), 1, 1, 1, 1, 1);
+		$garage['mrims'] = $myts->displayTarea($thegarage->getVar('mrims'), 1, 1, 1, 1, 1);
+		$garage['maudio'] = $myts->displayTarea($thegarage->getVar('maudio'), 1, 1, 1, 1, 1);
+		$garage['mfuture'] = $myts->displayTarea($thegarage->getVar('mfuture'), 1, 1, 1, 1, 1);
+		$garage['descript2'] = $myts->displayTarea($thegarage->getVar('descript2'), 1, 1, 1, 1, 1);
+		if($thegarage->getVar('descript2')){
 			if($subop == "more") $xoopsTpl->assign('showmore', true);
 			else $xoopsTpl->assign('more', _MD_XG_MORE);
 		} 
-		$garage['image'] = $myts->displayTarea($garage['image'], 0, 0, 1, 1, 0);
-		$garage['location'] = $myts->displayTarea($garage['location'], 0, 0, 0, 0, 0);
-		$garage['year'] = $myts->displayTarea($garage['year'], 0, 0, 0, 0, 0);
-		$garage['make'] = $myts->displayTarea($garage['make'], 0, 0, 0, 0, 0);
-		$garage['model'] = $myts->displayTarea($garage['model'], 0, 0, 0, 0, 0);
-		$garage['style'] = $myts->displayTarea($garage['style'], 0, 0, 0, 0, 0);
-		$garage['engine'] = $myts->displayTarea($garage['engine'], 0, 0, 0, 0, 0);
-		$garage['color'] = $myts->displayTarea($garage['color'], 0, 0, 0, 0, 0);
-		$garage['rt'] = $myts->displayTarea($garage['rt'], 0, 0, 0, 0, 0);
-		$garage['sixty'] = $myts->displayTarea($garage['sixty'], 0, 0, 0, 0, 0);
-		$garage['three'] = $myts->displayTarea($garage['three'], 0, 0, 0, 0, 0);
-		$garage['eigth'] = $myts->displayTarea($garage['eigth'], 0, 0, 0, 0, 0);
-		$garage['eigthm'] = $myts->displayTarea($garage['eigthm'], 0, 0, 0, 0, 0);
-		$garage['thou'] = $myts->displayTarea($garage['thou'], 0, 0, 0, 0, 0);
-		$garage['quart'] = $myts->displayTarea($garage['quart'], 0, 0, 0, 0, 0);
-		$garage['quartm'] = $myts->displayTarea($garage['quartm'], 0, 0, 0, 0, 0);
-		$garage['list'] = $myts->displayTarea($garage['list'], 0, 0, 0, 0, 0);
+		$garage['image'] = $myts->displayTarea($thegarage->getVar('image'), 0, 0, 1, 1, 0);
+		$garage['location'] = $myts->displayTarea($thegarage->getVar('location'), 0, 0, 0, 0, 0);
+		$garage['year'] = $myts->displayTarea($thegarage->getVar('year'), 0, 0, 0, 0, 0);
+		$garage['make'] = $myts->displayTarea($thegarage->getVar('make'), 0, 0, 0, 0, 0);
+		$garage['model'] = $myts->displayTarea($thegarage->getVar('model'), 0, 0, 0, 0, 0);
+		$garage['style'] = $myts->displayTarea($thegarage->getVar('style'), 0, 0, 0, 0, 0);
+		$garage['engine'] = $myts->displayTarea($thegarage->getVar('engine'), 0, 0, 0, 0, 0);
+		$garage['color'] = $myts->displayTarea($thegarage->getVar('color'), 0, 0, 0, 0, 0);
+		$garage['rt'] = $myts->displayTarea($thegarage->getVar('rt'), 0, 0, 0, 0, 0);
+		$garage['sixty'] = $myts->displayTarea($thegarage->getVar('sixty'), 0, 0, 0, 0, 0);
+		$garage['three'] = $myts->displayTarea($thegarage->getVar('three'), 0, 0, 0, 0, 0);
+		$garage['eigth'] = $myts->displayTarea($thegarage->getVar('eigth'), 0, 0, 0, 0, 0);
+		$garage['eigthm'] = $myts->displayTarea($thegarage->getVar('eigthm'), 0, 0, 0, 0, 0);
+		$garage['thou'] = $myts->displayTarea($thegarage->getVar('thou'), 0, 0, 0, 0, 0);
+		$garage['quart'] = $myts->displayTarea($thegarage->getVar('quart'), 0, 0, 0, 0, 0);
+		$garage['quartm'] = $myts->displayTarea($thegarage->getVar('quartm'), 0, 0, 0, 0, 0);
+		$garage['list'] = $myts->displayTarea($thegarage->getVar('list'), 0, 0, 0, 0, 0);
 		
-		if($garage['list']){
+		if($thegarage->getVar('list')){
 			if($xoopsModuleConfig['listformat']) {
-				$garage['list2'] = explode(",",$garage['list']);
+				$garage['list2'] = explode(",",$thegarage->getVar('list'));
 				foreach($garage['list2'] as $item){
 					$items[] = trim($item);
 				}
@@ -118,37 +123,37 @@ $garage['image'] = "[img align=center]". XOOPS_UPLOAD_URL. "/" . "garage/".$gara
 		$xoopsTpl->assign('listformat', $xoopsModuleConfig['listformat']);
 		
 		if($userIsAdmin == 0){
-			if($garage['approved'] == 0){
+			if($thegarage->getVar('approved') == 0){
 				redirect_header("index.php",2,_MD_XG_NOTAPPROVEDYET);
 				exit;
 			}
-			if($garage['viewable'] == 0 && $uid != $garage['uid']){
+			if($thegarage->getVar('viewable') == 0 && $uid != $garage['uid']){
 				redirect_header("index.php",2,_MD_XG_NOTVIEWABLE);
 				exit;
 			}
-			if($garage['disabled'] == 1){
+			if($thegarage->getVar('disabled') == 1){
 				redirect_header("index.php",2,_MD_XG_DISABLED);
 				exit;
 			}
 		}
 
-		$garage['uname'] = xoops_getLinkedUnameFromId($garage['uid']);//added by jlm69
+		$garage['uname'] = xoops_getLinkedUnameFromId($thegarage->getVar('uid'));//added by jlm69
 
-		if(($uid == $garage['uid'] && $xoopsModuleConfig['canuseredit']) || ($xoopsModuleConfig['canadminsedit'] && $userIsAdmin)){
+		if(($uid == $thegarage->getVar('uid') && $xoopsModuleConfig['canuseredit']) || ($xoopsModuleConfig['canadminsedit'] && $userIsAdmin)){
 			$xoopsTpl->assign('panel', true);
 			$xoopsTpl->assign('editgarage',_MD_XG_EDITGARAGE);
 			if($userIsAdmin) {
 				$xoopsTpl->assign('adminlink',_MD_XG_ADMINLINK);
-				if($garage['approved'] == 0){
+				if($thegarage->getVar('approved') == 0){
 					$xoopsTpl->assign('approvegarage',_MD_XG_APPROVEGARAGE);
 				}
-				if($garage['disabled'] == 0){
+				if($thegarage->getVar('disabled') == 0){
 					$xoopsTpl->assign('disablegarage',_MD_XG_DISABLEGARAGE);
-				} elseif ($garage['disabled']) $xoopsTpl->assign('enablegarage',_MD_XG_ENABLEGARAGE);
+				} elseif ($thegarage->getVar('disabled')) $xoopsTpl->assign('enablegarage',_MD_XG_ENABLEGARAGE);
 				$xoopsTpl->assign('deletegarage',_MD_XG_DELETEGARAGE);
 			}
 		}
-		$cid = $garage['cid'];
+		$cid = $thegarage->getVar('cid');
 		if($xoopsModuleConfig['usecats']){
 			include_once XOOPS_ROOT_PATH."/class/xoopstree.php";
 			$cattree = new XoopsTree($xoopsDB->prefix("garage_cats"),"cid","gid");
@@ -156,7 +161,8 @@ $garage['image'] = "[img align=center]". XOOPS_UPLOAD_URL. "/" . "garage/".$gara
 			$xoopsTpl->assign('path',$path);
 
 			}	
-		
+		//why not just use smarty constants in the template?
+					unset($myGarage); //unset .
 		$xoopsTpl->assign('allowcomments', $xoopsModuleConfig['allowcomments']);
 		$xoopsTpl->assign('gid', $gid);
 		$xoopsTpl->assign('gname', _MD_XG_GNAME);
