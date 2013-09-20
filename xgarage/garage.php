@@ -1,8 +1,10 @@
 <?php
 require('header.php');
-
+global $xoopsModuleConfig, $xoopsUser;
 
 //Group Perms added by jlm69
+if ($xoopsModuleConfig['usecats']) {
+
 $module_id = $xoopsModule->getVar('mid');
 
 if (is_object($xoopsUser)) {
@@ -20,7 +22,8 @@ $perm_itemid = 0;
 if (!$gperm_handler->checkRight("garage_submit", $perm_itemid, $groups, $module_id)) {
  redirect_header(XOOPS_URL."/index.php", 3, _NOPERM);
 exit();
-}
+		}
+	}
 // End Group Perms
 
 
@@ -139,6 +142,7 @@ switch ($op){
 if($success) {
 $notification_handler =& xoops_gethandler('notification');
 $id = $xoopsDB->getInsertId();
+$cid = $_POST['cid'];
 $tags=array();
 $tags['YEAR'] = $year;
 $tags['MAKE'] = $make;
@@ -158,7 +162,7 @@ $notification_handler->triggerEvent ('listing', $gid, 'new_listing', $tags );
 
 }
 
-			if($success) redirect_header("index.php",2,_MD_XG_ADDSUCCESS);
+			if($success) redirect_header("index.php",8,_MD_XG_ADDSUCCESS);
 			else redirect_header("index.php",2,_MD_XG_ADDFAILURE);
 		} else redirect_header("index.php",2,_MD_XG_ADDFAILURE);
 	break;
@@ -293,12 +297,12 @@ $notification_handler->triggerEvent ('listing', $gid, 'new_listing', $tags );
 		$sform->addElement(new XoopsFormText(_MD_XG_QUART, 'quart', 50, 75, $quart), false);
 		$sform->addElement(new XoopsFormText(_MD_XG_QUARTM, 'quartm', 50, 75, $quartm), false);
 		$sform->addElement(new XoopsFormText($xoopsModuleConfig['listname'], 'list', 50, 255, $list), false);
-		$sform->addElement(getEditor(_MD_XG_MENGINE, 'mengine', $mengine, 10, 40), true);
-		$sform->addElement(getEditor(_MD_XG_MEXTERIOR, 'mexterior', $mexterior, 10, 40), true);
-		$sform->addElement(getEditor(_MD_XG_MINTERIOR, 'minterior', $minterior, 10, 40), true);
-		$sform->addElement(getEditor(_MD_XG_MRIMS, 'mrims', $mrims, 10, 40), true);
-		$sform->addElement(getEditor(_MD_XG_MAUDIO, 'maudio', $maudio, 10, 40), true);
-		$sform->addElement(getEditor(_MD_XG_MFUTURE, 'mfuture', $mfuture, 10, 40), true);
+		$sform->addElement(getEditor(_MD_XG_MENGINE, 'mengine', $mengine, 10, 40), false);
+		$sform->addElement(getEditor(_MD_XG_MEXTERIOR, 'mexterior', $mexterior, 10, 40), false);
+		$sform->addElement(getEditor(_MD_XG_MINTERIOR, 'minterior', $minterior, 10, 40), false);
+		$sform->addElement(getEditor(_MD_XG_MRIMS, 'mrims', $mrims, 10, 40), false);
+		$sform->addElement(getEditor(_MD_XG_MAUDIO, 'maudio', $maudio, 10, 40), false);
+		$sform->addElement(getEditor(_MD_XG_MFUTURE, 'mfuture', $mfuture, 10, 40), false);
 		if($xoopsModuleConfig['usedescript2']) $sform->addElement(getEditor(_MD_XG_DESCRIPT2, 'descript2', $descript2, 10, 40), false);
 		if($xoopsModuleConfig['linkgarage']){
 			$linkgarage_choice = new XoopsFormRadio(_MD_XG_LINKGARAGE,'linkgarage',$linkgarage);
@@ -403,12 +407,12 @@ $notification_handler->triggerEvent ('listing', $gid, 'new_listing', $tags );
 			$sform->addElement(new XoopsFormText(_MD_XG_QUART, 'quart', 50, 75, $quart), false);
 			$sform->addElement(new XoopsFormText(_MD_XG_QUARTM, 'quartm', 50, 75, $quartm), false);
 			$sform->addElement(new XoopsFormText($xoopsModuleConfig['listname'], 'list', 50, 255, $list), false);
-			$sform->addElement(getEditor(_MD_XG_MENGINE, 'mengine', $mengine, 20, 40), true);
-			$sform->addElement(getEditor(_MD_XG_MEXTERIOR, 'mexterior', $mexterior, 20, 40), true);
-			$sform->addElement(getEditor(_MD_XG_MINTERIOR, 'minterior', $minterior, 20, 40), true);
-			$sform->addElement(getEditor(_MD_XG_MRIMS, 'mrims', $mrims, 20, 40), true);
-			$sform->addElement(getEditor(_MD_XG_MAUDIO, 'maudio', $maudio, 20, 40), true);
-			$sform->addElement(getEditor(_MD_XG_MFUTURE, 'mfuture', $mfuture, 20, 40), true);
+			$sform->addElement(getEditor(_MD_XG_MENGINE, 'mengine', $mengine, 20, 40), false);
+			$sform->addElement(getEditor(_MD_XG_MEXTERIOR, 'mexterior', $mexterior, 20, 40), false);
+			$sform->addElement(getEditor(_MD_XG_MINTERIOR, 'minterior', $minterior, 20, 40), false);
+			$sform->addElement(getEditor(_MD_XG_MRIMS, 'mrims', $mrims, 20, 40), false);
+			$sform->addElement(getEditor(_MD_XG_MAUDIO, 'maudio', $maudio, 20, 40), false);
+			$sform->addElement(getEditor(_MD_XG_MFUTURE, 'mfuture', $mfuture, 20, 40), false);
 			if($xoopsModuleConfig['usedescript2']) $sform->addElement(getEditor(_MD_XG_DESCRIPT2, 'descript2', $descript2, 20, 40), false);
 			if($xoopsModuleConfig['linkgarage']){
 				$linkgarage_choice = new XoopsFormRadio(_MD_XG_LINKGARAGE,'linkgarage',$linkgarage);

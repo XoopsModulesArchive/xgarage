@@ -3,8 +3,11 @@
 
 require('header.php');
 
+global $xoopsModuleConfig, $xoopsUser;
 
 // Group Permissions added by jlm69
+if($xoopsModuleConfig['usecats']){
+
 $module_id = $xoopsModule->getVar('mid');
 
 if (is_object($xoopsUser)) {
@@ -23,7 +26,9 @@ $perm_itemid = 0;
 if (!$gperm_handler->checkRight("garage_view", $perm_itemid, $groups, $module_id)) {
 redirect_header(XOOPS_URL."/index.php", 3, _NOPERM);
 exit();
-}
+		}
+
+	}
 // End Group Permissions
 
 
@@ -178,7 +183,7 @@ $garage['image'] = "[img align=right]". XOOPS_UPLOAD_URL. "/" . "garage/".$garag
 		$xoopsTpl->assign('mrims',_MD_XG_MRIMS);
 		$xoopsTpl->assign('maudio',_MD_XG_MAUDIO);
 		$xoopsTpl->assign('mfuture',_MD_XG_MFUTURE);
-		
+		$xoopsTpl->assign('garage_of',_MD_XG_GARAGEOF);
 		
 
 		if($xoopsModuleConfig['allowcomments']) include XOOPS_ROOT_PATH.'/include/comment_view.php';		
