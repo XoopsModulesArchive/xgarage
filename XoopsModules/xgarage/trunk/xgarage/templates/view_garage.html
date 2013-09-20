@@ -18,7 +18,7 @@
 
 <table width="100%" border="0" align="center" cellpadding="3" cellspacing="1" summary="" class="forumline">
         <tr>
-                <th height="25" nowrap colspan="2" class="thHead">The Garage of :: <{$garage.name}></th>
+                <th height="25" nowrap colspan="2" class="thHead"><{$garage_of}> <{$garage.name}></th>
         </tr>
         <tr>
                 <td width="50%" height="28" align="center" class="catLeft"><b><span class="gen">Owner Info</span></b></td>
@@ -26,41 +26,41 @@
         </tr>
         <tr>
                 <td valign="top" class="row1"><span class="gen"><{if $garage.linkgarage}><a href="../../userinfo.php?uid=<{$garage.uid}>"><{$linkgarage}></a><{/if}>
-                  <{$ownername}>:&nbsp;<b><{$garage.uname}></b><br />
-                <{$location}>:&nbsp;<{$garage.location}><br /></span></td>
+                  <b><{$ownername}>:</b>&nbsp;<{$garage.uname}><br />
+                <b><{$location}>:</b>&nbsp;<{$garage.location}><br /></span></td>
                 <td valign="top" rowspan="3" class="row1"><table width="100%" border="0" cellspacing="1" cellpadding="3">
-                <tr>
+               <{if $rt != ''}> <tr>
                   <td valign="middle" align="right" nowrap="nowrap"><span class="gen"><{$rt}>:</span></td>
                   <td valign="top" width="100%"><b><span class="gen"><{$garage.rt}></span></b></td>
-                </tr>
+                </tr><{/if}>
                 <tr>
-                  <td valign="middle" align="right" nowrap="nowrap"><span class="gen"><{$sixty}>:</span></td>
+                  <{if $garage.sixty}><td valign="middle" align="right" nowrap="nowrap"><span class="gen"><{$sixty}>:</span></td>
                   <td valign="top" width="100%"><b><span class="gen"><{$garage.sixty}></span></b></td>
-                </tr>
+                </tr><{/if}>
                 <tr>
-                  <td valign="middle" align="right" nowrap="nowrap"><span class="gen"><{$three}>:</span></td>
+                  <{if $garage.three}><td valign="middle" align="right" nowrap="nowrap"><span class="gen"><{$three}>:</span></td>
                   <td><b><span class="gen"><{$garage.three}></span></b></td>
-                </tr>
+                </tr><{/if}>
                 <tr>
-                  <td valign="middle" align="right" nowrap="nowrap"><span class="gen"><{$eigth}>:</span></td>
+                  <{if $garage.eigth}><td valign="middle" align="right" nowrap="nowrap"><span class="gen"><{$eigth}>:</span></td>
                   <td><span class="gen"><b><{$garage.eigth}></b></span></td>
-                </tr>
-                <tr>
+                </tr><{/if}>
+                <{if $garage.eigthm}><tr>
                   <td valign="middle" align="right" nowrap="nowrap"><span class="gen"><{$eigthm}>:</span></td>
                   <td><b><span class="gen"><{$garage.eigthm}></span></b></td>
-                </tr>
-                <tr>
+                </tr><{/if}>
+                <{if $garage.thou}><tr>
                   <td valign="top" align="right" nowrap="nowrap"><span class="gen"><{$thou}>:</span></td>
                   <td> <b><span class="gen"><{$garage.thou}></span></b></td>
-                </tr>
-                <tr>
+                </tr><{/if}>
+               <{if $garage.quart}> <tr>
                   <td valign="top" align="right" nowrap="nowrap"><span class="gen"><{$quart}>:</span></td>
                   <td> <b><span class="gen"><{$garage.quart}></span></b></td>
-                </tr>
-                <tr>
+                </tr><{/if}>
+                <{if $garage.quartm}><tr>
                   <td valign="top" align="right" nowrap="nowrap"><span class="gen"><{$quartm}>:</span></td>
                   <td> <b><span class="gen"><{$garage.quartm}></span></b></td>
-                </tr>
+                </tr><{/if}>
 
           </table></td>
         </tr>
@@ -100,7 +100,7 @@
                 <td height="28" align="left" class="catRight"><b><span class="gen"></span></b></td>
         </tr>
         <tr>
-                <td valign="top" class="row1" align="left"><span class="gen"><{$mengine}>:<hr><center><b><{$garage.mengine}><hr></b></center><br /> <{$mexterior}>:<hr><center><b><{$garage.mexterior}></b><hr></center><br /><{$minterior}>: <hr><center><b><{$garage.minterior}></b><hr></center><br /> <{$mrims}>: <hr><center><b><{$garage.mrims}></b><hr></center><br /><{$maudio}>: <hr><center><b><{$garage.maudio}></b><hr></center><br /><{$mfuture}>: <hr><center><b><{$garage.mfuture}></b><hr></center>
+                <td valign="top" class="row1" align="left"><span class="gen"><{if $garage.mengine}><b><{$mengine}>:</b><hr><center><{$garage.mengine}><hr></center><br /><{/if}> <{if $garage.mexterior}><b><{$mexterior}>:</b><hr><center><{$garage.mexterior}><hr></center><br /><{/if}><{if $garage.minterior}><b><{$minterior}>:</b> <hr><center><{$garage.minterior}><hr></center><br /><{/if}> <{if $garage.mrims}><b><{$mrims}>:</b> <hr><center><{$garage.mrims}><hr></center><br /><{/if}><{if $garage.maudio}><b><{$maudio}>:</b> <hr><center><{$garage.maudio}><hr></center><br /><{/if}><{if $garage.mfuture}><b><{$mfuture}>:</b> <hr><center><{$garage.mfuture}><hr></center><{/if}>
 </span></td>
           <td valign="top" class="row1"><table width="100%" cellpadding="2" cellspacing="1" border="0" class="forumline">
   <!-- BEGIN no_pics -->

@@ -3,10 +3,10 @@
 global $xoopsModuleConfig;
 
 $modversion['name'] = _MI_NAME;
-$modversion['version'] = .03;
+$modversion['version'] = .04;
 $modversion['description'] = _MI_DESC;
-$modversion['credits'] = 'www.calibernation.com / www.xgarage.org / www.jlmzone.com';
-$modversion['author'] = 'Northern, script_fu, jlm69';
+$modversion['credits'] = 'www.calibernation.com / www.xgarage.org / www.jlmzone.com / www.arabxoops.com';
+$modversion['author'] = 'Northern, script_fu, jlm69, mowaffak';
 $modversion['help'] = 'docs';
 $modversion['license'] = 'GPL';
 $modversion['official'] = 0;

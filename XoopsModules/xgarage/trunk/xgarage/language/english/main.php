@@ -108,4 +108,6 @@ define("_MD_XG_MFUTURE","Future");
 
 define("_MD_XG_USERNAME","Username ");
 define("_MD_XG_STYLE","Body Style");
+define("_MD_XG_GARAGEOF","The Garage of ::");
+
 ?>
