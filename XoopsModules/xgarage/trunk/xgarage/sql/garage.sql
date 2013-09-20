@@ -15,9 +15,10 @@ CREATE TABLE `garage` (
   `imagechoice` tinyint(4) NOT NULL default '0',
   `url` varchar(255) NOT NULL default '',
   `location` varchar(75) NOT NULL default '',
-  `mark` varchar(75) NOT NULL default '',
-  `model` varchar(75) NOT NULL default '',
   `year` varchar(75) NOT NULL default '',
+  `make` varchar(75) NOT NULL default '',
+  `model` varchar(75) NOT NULL default '',
+  `style` varchar(75) NOT NULL default '',
   `engine` varchar(75) NOT NULL default '',
   `color` varchar(75) NOT NULL default '',
   `rt` varchar(75) NOT NULL default '',
@@ -29,7 +30,7 @@ CREATE TABLE `garage` (
   `quart` varchar(75) NOT NULL default '',
   `quartm` varchar(75) NOT NULL default '',
   `mengine` text NOT NULL,
-  `meterior` text NOT NULL,
+  `mexterior` text NOT NULL,
   `minterior` text NOT NULL,
   `mrims` text NOT NULL,
   `mfuture` text NOT NULL,
@@ -47,6 +48,7 @@ CREATE TABLE `garage` (
 CREATE TABLE `garage_cats` (
   `cid` int(11) NOT NULL auto_increment,
   `name` varchar(75) NOT NULL default '',
+  `racing` tinyint(1) NOT NULL default '0',
   `gid` int(11) NOT NULL default '0',
   UNIQUE KEY `ID` (`cid`)
 ) TYPE=MyISAM COMMENT='garage categories';

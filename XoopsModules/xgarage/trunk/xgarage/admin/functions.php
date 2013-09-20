@@ -1,7 +1,7 @@
 <?php
 function getCats($gid){
 	global $xoopsDB;
-	$sql = "SELECT cid,name FROM " . $xoopsDB->prefix("garage_cats") . " WHERE gid = '$gid' ORDER BY name";
+	$sql = "SELECT cid,name,racing FROM " . $xoopsDB->prefix("garage_cats") . " WHERE gid = '$gid' ORDER BY name";
 		if ( !$result = $xoopsDB->query($sql) ) {
 			exit("$sql > SQL Error in function :: getCats($gid)");
 		} else {
@@ -23,11 +23,11 @@ function getName($cid){
 			return ($name);
 		}
 }
-function addCat($name,$gid){
+function addCat($name,$racing,$gid){
 	global $xoopsDB;
-	$sql = "INSERT INTO  " . $xoopsDB->prefix("garage_cats") . " (name,gid) VALUES ('$name',$gid)";
+	$sql = "INSERT INTO  " . $xoopsDB->prefix("garage_cats") . " (name,racing,gid) VALUES ('$name','$racing',$gid)";
 		if ( !$result = $xoopsDB->query($sql) ) {
-			exit("$sql > SQL Error in function :: addCat($name,$gid)");
+			exit("$sql > SQL Error in function :: addCat($name,$racing,$gid)");
 			return 0;
 		} else {
 			return 1;
@@ -102,7 +102,7 @@ function enableGarage($gid){
 }
 function getActiveGarages(){
 	global $xoopsDB;
-	$sql = ("SELECT id,name,viewable FROM " . $xoopsDB->prefix("garage") . " WHERE disabled='0' AND approved='1' ORDER BY name");
+	$sql = ("SELECT id,viewable,name,year,make,model,style FROM " . $xoopsDB->prefix("garage") . " WHERE disabled='0' AND approved='1' ORDER BY name");
 	$result=$xoopsDB->query($sql);
 	$rows = array();
 	while($row = $xoopsDB->fetchArray($result)) {
@@ -135,7 +135,7 @@ function getDisabledGarages(){
 
 function adminMenu ($currentoption = 0, $breadcrumb = '')
 {
-	
+
 	/* Nice buttons styles */
 	echo "
     	<style type='text/css'>
@@ -157,29 +157,35 @@ function adminMenu ($currentoption = 0, $breadcrumb = '')
     ";
 	
 	// global $xoopsDB, $xoopsModule, $xoopsConfig, $xoopsModuleConfig;
-	global $xoopsModule, $xoopsConfig;
+	global $xoopsModule, $xoopsConfig, $xoopsModuleConfig;
 	
 	$myts =& MyTextSanitizer::getInstance();
 	
-	$tblColors = Array();
-	$tblColors[0] = $tblColors[1] = $tblColors[2] = $tblColors[3] = $tblColors[4] = $tblColors[5] = $tblColors[6] = $tblColors[7] = $tblColors[8] = '';
+	$tblColors = array();
+	$tblColors[0] = $tblColors[1] = $tblColors[2] = $tblColors[3] = $tblColors[4] = $tblColors[5] = $tblColors[6] = '';
 	$tblColors[$currentoption] = 'current';
 	echo "<div id='buttontop'>";
 	echo "<table style=\"width: 100%; padding: 0; \" cellspacing=\"0\"><tr>";
 	//echo "<td style=\"width: 45%; font-size: 10px; text-align: left; color: #2F5376; padding: 0 6px; line-height: 18px;\"><a class=\"nobutton\" href=\"../../system/admin.php?fct=preferences&amp;op=showmod&amp;mod=" . $xoopsModule->getVar('mid') . "\">" . _AM_SCLIENT_OPTS . "</a> | <a href=\"../index.php\">" . _AM_SCLIENT_GOMOD . "</a> | <a href=\"import.php\">" . _AM_SCLIENT_IMPORT . "</a> | <a href='" . smartclient_getHelpPath() ."' target=\"_blank\">" . _AM_SCLIENT_HELP . "</a> | <a href=\"about.php\">" . _AM_SCLIENT_ABOUT . "</a></td>";
-	echo "<td style=\"width: 70%; font-size: 10px; text-align: left; color: #2F5376; padding: 0 6px; line-height: 18px;\"><a class=\"nobutton\" href=\"../../system/admin.php?fct=preferences&amp;op=showmod&amp;mod=" . $xoopsModule->getVar('mid') . "\">" . _AM_GARAGES_OPTS . "</a> | <a href=\"../index.php\">" . _AM_GARAGES_GOMOD . "</a> | <a href=\"index.php?op=documentation\">" . _AM_GARAGES_DOCS . "</a> | <a href=\"index.php?op=support\">" . _AM_GARAGES_SUPPORT . "</a> | <a href=\"index.php?op=donations\">" . _AM_GARAGES_DONATIONS . "</a></td>";
+	echo "<td style=\"width: 70%; font-size: 10px; text-align: left; color: #2F5376; padding: 0 6px; line-height: 18px;\"><a class=\"nobutton\" href=\"../../system/admin.php?fct=preferences&amp;op=showmod&amp;mod=" . $xoopsModule->getVar('mid') . "\">" . _AM_GARAGES_OPTS . "</a> | <a href=\"../index.php\">" . _AM_GARAGES_GOMOD . "</a> | <a href=\"index.php?op=support\">" . _AM_GARAGES_SUPPORT . "</a> | <a href=\"index.php?op=donations\">" . _AM_GARAGES_DONATIONS . "</a></td>";
 	echo "<td style=\"width: 30%; font-size: 10px; text-align: right; color: #2F5376; padding: 0 6px; line-height: 18px;\"><b>" . $myts->displayTarea($xoopsModule->name()) . " " . _AM_GARAGES_MODADMIN . "</b> " . $breadcrumb . "</td>";
 	echo "</tr></table>";
 	echo "</div>";
 	echo "<div id='buttonbar'>";
 	echo "<ul>";
-	echo "<li id='" . $tblColors[0] . "'><a href=\"../garage.php?op=add\"><span>" . _AM_GARAGES_ADDNEWGARAGE . "</span></a></li>";
+	echo "<li id='" . $tblColors[0] . "'><a href=\"index.php?op=documentation\"><span>" . _AM_GARAGES_DOCS . "</span></a></li>";
 	echo "<li id='" . $tblColors[1] . "'><a href=\"index.php\"><span>" . _AM_GARAGES_INDEX . "</span></a></li>";
 	echo "<li id='" . $tblColors[2] . "'><a href=\"index.php?op=view_new\"><span>" . _AM_GARAGES_APPROVE . "</span></a></li>";
 	echo "<li id='" . $tblColors[3] . "'><a href=\"index.php?op=view_disabled\"><span>" . _AM_GARAGES_DISABLED . "</span></a></li>";
+if($xoopsModuleConfig['usecats']){
 	echo "<li id='" . $tblColors[4] . "'><a href=\"index.php?op=cats\"><span>" . _AM_GARAGES_CATEGORIES . "</span></a></li>";
 	echo "<li id='" . $tblColors[5] . "'><a href=\"garageperms.php\"><span>" . _AM_GARAGES_PERMISSIONS . "</span></a></li>";
-	echo "</ul></div>";
 }
+	
+	echo "</ul></div>";
+
+}
+
+
 
 ?>

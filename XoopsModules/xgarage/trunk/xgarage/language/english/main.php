@@ -27,11 +27,11 @@ define("_MD_XG_ADMINLINK","Garages Admin");
 
 define("_MD_XG_MAINLINK","Main");
 
-define("_MD_XG_NONEYET","There are no garage yet.");
+define("_MD_XG_NONEYET","There are no garages yet.");
 
-define("_MD_XG_HOWTOADDGARAGE","Follow these intructions to get your garage added to this site.");
+define("_MD_XG_HOWTOADDGARAGE","Follow these instructions to get your garage added to this site.");
 define("_MD_XG_USERCANNOTSUBMIT","Contact the webmaster for more information on adding a garage.");
-define("_MD_XG_HOWTOCHANGEGARAGE","Follow these intructions to get your garage changed.");
+define("_MD_XG_HOWTOCHANGEGARAGE","Follow these instructions to get your garage changed.");
 define("_MD_XG_USERCANNOTCHANGE","Contact the webmaster for more information on changing your garage.");
 
 define("_MD_XG_ADDGARAGE","Add a New Garage");
@@ -106,8 +106,13 @@ define("_MD_XG_MRIMS","Rims/Tires");
 define("_MD_XG_MAUDIO","Audio/Video");
 define("_MD_XG_MFUTURE","Future");
 
+//added by jlm69
 define("_MD_XG_USERNAME","Username ");
 define("_MD_XG_STYLE","Body Style");
 define("_MD_XG_GARAGEOF","The Garage of ::");
-
+define("_MD_XG_OWNERINFO","Owner Info");
+define("_MD_XG_GARAGE_INFO","Garage Info");
+define("_MD_XG_MODIFICATIONS","Modifications");
+define("_MD_XG_TIME_TRIALS","Time Trials");
+define("_MD_XG_PROFILE","XGarage Car Profile");
 ?>

@@ -8,7 +8,7 @@ define("_AM_GARAGES_ADDNEWGARAGE", "Submit");
 define("_AM_GARAGES_APPROVE", "Approve");
 define("_AM_GARAGES_DISABLED", "Disabled");
 define("_AM_GARAGES_CATEGORIES", "Categories");
-define("_AM_GARAGES_DOCUMENTATION", "Documentation");
+
 define("_AM_GARAGES_SUPPORT", "Support");
 define("_AM_GARAGES_DONATIONS", "Donations");
 define("_AM_DOCS","Garages Module Documentation");
@@ -69,8 +69,27 @@ define("_AM_GARAGES_GPERM_G_ADD" , "Can add" ) ;
 define("_AM_GARAGES_CAT2GROUPDESC" , "Check categories which you allow to access" ) ;
 define("_AM_GARAGES_GROUPPERMDESC" , "Select group(s) allowed to submit listings." ) ;
 define("MI_GARAGES_GROUPPERM", "Submit Permissions");
-define("_AM_GARAGES_SUBMITFORM", "Submit Permissions");
-define("_AM_GARAGES_SUBMITFORM_DESC", "Select, who can submit a listing");
 define("_AM_GARAGES_VIEWFORM", "View Permissions");
-define("_AM_GARAGES_VIEWFORM_DESC", "Select, who can view listings");
+define("_AM_GARAGES_SUBMITFORM", "Submit Permissions");
+define("_AM_GARAGES_VIEWFORM_DESC", "Select, who can view a category");
+define("_AM_GARAGES_SUBMITFORM_DESC", "Select, who can submit a listing");
+
+//Changes and additions by jlm69 v .05
+define("_AM_XG_RACING", "Show racing times in this category");
+define("_AM_XG_DOCUMENTATION", "Documentation");
+define("_AM_XG_CREDITS", "Credits");
+define("_AM_XG_ADMIN_MAN", "Administration Manual");
+define("_AM_XG_USER_MAN", "User Manual");
+define("_AM_XG_DOC_SUPPORT", "Live Docs and support at X-Garage");
+define("_AM_XG_DOC_HEAD", "Garages Module for XOOPS 2.0 Documentation");
+define("_AM_XG_DOC_FORUM", "Garages Module for XOOPS Support Forum");
+define("_AM_XG_ADMIN", "Administration");
+define("_AM_XG_USERS", "Users");
+define("_AM_XG_CODEDBY", "Concept, Coded and Maintained");
+define("_AM_XG_TRANSLATORS", "Translators: ");
+define("_AM_XG_UPDATEMODULE", "Update the Module Now");
+define("_AM_XG_UPGR_ACCESS_ERROR", "Error, to use the upgrade script, you must be an admin on this module");
+define("_AM_XG_UPGRADECOMPLETE", "Upgrade Complete");
+define('_AM_XG_UPGRADEFAILED', 'Upgrade Failed');
+define('_AM_XG_UPGRADEFAILED0', "Please note the messages and try to correct the problems with phpMyadmin and the sql definition's file available in the 'sql' folder of the garage module");
 ?>

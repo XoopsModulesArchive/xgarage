@@ -1,6 +1,9 @@
 <div style="font-size:small;">
 <a href="index.php"><img src="images/icons/index.png" align="middle" title="[<{$index}>]" alt="[<{$index}>]"></a>
-<{if $addnewgarage}><a href="garage.php?op=add<{if $cid}>&cid=<{$cid}><{/if}>"><img src="images/icons/add.png" align="middle" title="[<{$addnewgarage}>]" alt="[<{$addnewgarage}>]"></a><{/if}>
+
+
+<{if $show_add}>
+<{if $addnewgarage}><a href="garage.php?op=add<{if $cid}>&cid=<{$cid}><{/if}>"><img src="images/icons/add.png" align="middle" title="[<{$addnewgarage}>]" alt="[<{$addnewgarage}>]"></a><{/if}><{/if}>
 <{if $panel == true}>
 	<{if $adminlink}><a href="../../modules/garage/admin/index.php"><img src="images/icons/admin.png" align="middle" title="[<{$adminlink}>]" alt="[<{$adminlink}>]"></a><{/if}>
 <{/if}>

@@ -2,7 +2,7 @@
 
 function getRoster($cid){
 	global $xoopsDB;
-	$sql = "SELECT id,name FROM " . $xoopsDB->prefix("garage") . " WHERE (approved=1 AND viewable=1 AND disabled=0) AND cid=$cid ORDER BY name";
+	$sql = "SELECT id,name FROM " . $xoopsDB->prefix("garage") . " WHERE (approved=1 AND viewable=1 AND disabled=0) AND cid='$cid' ORDER BY name";
 		if ( !$result = $xoopsDB->query($sql) ) {
 			return;
 			//exit("SQL Error in function :: getRoster($cid)");
@@ -16,40 +16,40 @@ function getRoster($cid){
 
 function getGarage($gid){
 	global $xoopsDB;
-	$sql = "SELECT id,approved,viewable,disabled,uid,cid,name,image,uploadimage,imagechoice,url,location,year,make,model,style,engine,color,rt,sixty,three,eigth,eigthm,thou,quart,quartm,list,mengine,mexterior,minterior,mrims,maudio,mfuture,descript2,linkGarage FROM " . $xoopsDB->prefix("garage") . " WHERE id = $gid";
+	$sql = "SELECT id,approved,viewable,disabled,uid,cid,name,image,uploadimage,imagechoice,url,location,year,make,model,style,engine,color,rt,sixty,three,eigth,eigthm,thou,quart,quartm,list,mengine,mexterior,minterior,mrims,maudio,mfuture,descript2,linkgarage FROM " . $xoopsDB->prefix("garage") . " WHERE id = '$gid'";
 		if ( !$result = $xoopsDB->query($sql) ) {
 			exit("$sql > SQL Error in function :: getGarage()");
 		}	
-		$Garage = array();
+		$garage = array();
 		while ( $row = $xoopsDB->fetchArray($result) ) {
-			$Garage = $row;
+			$garage = $row;
 		}
-	return $Garage;
+	return $garage;
 }
 
-function addGarage($aa,$uid,$cid,$name,$image,$uploadimage,$imagechoice,$url,$location,$year,$make,$model,$style,$engine,$color,$rt,$sixty,$three,$eigth,$eigthm,$thou,$quart,$quartm,$list,$mengine,$mexterior,$minterior,$mrims,$maudio,$mfuture,$descript2,$linkGarage){
+function addGarage($aa,$uid,$cid,$name,$image,$uploadimage,$imagechoice,$url,$location,$year,$make,$model,$style,$engine,$color,$rt,$sixty,$three,$eigth,$eigthm,$thou,$quart,$quartm,$list,$mengine,$mexterior,$minterior,$mrims,$maudio,$mfuture,$descript2,$linkgarage){
 	global $xoopsDB;
-	$sql = "INSERT INTO " . $xoopsDB->prefix("garage") . " (approved,uid,cid,name,image,uploadimage,imagechoice,url,location,year,make,model,style,engine,color,rt,sixty,three,eigth,eigthm,thou,quart,quartm,list,mengine,mexterior,minterior,mrims,maudio,mfuture,descript2,linkGarage) VALUES ($aa,$uid,$cid,'$name','$image','$uploadimage','$imagechoice','$url','$location','$year','$make','$model','$style','$engine','$color','$rt','$sixty','$three','$eigth','$eigthm','$thou','$quart','$quartm','$list','$mengine','$mexterior','$minterior','$mrims','$maudio','$mfuture','$descript2','$linkGarage')";
+	$sql = "INSERT INTO " . $xoopsDB->prefix("garage") . " (approved,uid,cid,name,image,uploadimage,imagechoice,url,location,year,make,model,style,engine,color,rt,sixty,three,eigth,eigthm,thou,quart,quartm,list,mengine,mexterior,minterior,mrims,maudio,mfuture,descript2,linkgarage) VALUES ($aa,$uid,$cid,'$name','$image','$uploadimage','$imagechoice','$url','$location','$year','$make','$model','$style','$engine','$color','$rt','$sixty','$three','$eigth','$eigthm','$thou','$quart','$quartm','$list','$mengine','$mexterior','$minterior','$mrims','$maudio','$mfuture','$descript2','$linkgarage')";
 		if ( !$result = $xoopsDB->query($sql) ) {
-			exit("$sql > SQL Error in function :: addGarage($aa,$uid,$cid,$name,$image,$uploadimage,$imagechoice,$url,$location,$year,$make,$model,$style,$engine,$color,$rt,$sixty,$three,$eigth,$eigthm,$thou,$quart,$quartm,$list,$mengine,$mexterior,$minterior,$mrims,$maudio,$mfuture,$descript2,$linkGarage)");
+			exit("$sql > SQL Error in function :: addGarage($aa,$uid,$cid,$name,$image,$uploadimage,$imagechoice,$url,$location,$year,$make,$model,$style,$engine,$color,$rt,$sixty,$three,$eigth,$eigthm,$thou,$quart,$quartm,$list,$mengine,$mexterior,$minterior,$mrims,$maudio,$mfuture,$descript2,$linkgarage)");
 		} else {
 			return 1;
 		}
 }
 
-function updateGarage($gid,$uid,$cid,$viewable,$name,$image,$imagechoice="0",$url,$location,$year,$make,$model,$style,$engine,$color,$rt,$sixty,$three,$eigth,$eigthm,$thou,$quart,$quartm,$list,$mengine,$mexterior,$minterior,$mrims,$maudio,$mfuture,$descript2,$linkGarage){
+function updateGarage($gid,$uid,$cid,$viewable,$name,$image,$imagechoice="0",$url,$location,$year,$make,$model,$style,$engine,$color,$rt,$sixty,$three,$eigth,$eigthm,$thou,$quart,$quartm,$list,$mengine,$mexterior,$minterior,$mrims,$maudio,$mfuture,$descript2,$linkgarage){
 	global $xoopsDB;
-	$sql = "UPDATE " . $xoopsDB->prefix("garage") . " SET uid=$uid,cid=$cid,viewable=$viewable,name='$name',image='$image',imagechoice='$imagechoice',url='$url',location='$location',year='$year',make='$make',model='$model',style='$style',engine='$engine',color='$color',rt='$rt',sixty='$sixty',three='$three',eigth='$eigth',eigthm='$eigthm',thou='$thou',quart='$quart',quartm='$quartm',list='$list',mengine='$mengine',mexterior='$mexterior',minterior='$minterior',mrims='$mrims',maudio='$maudio',mfuture='$mfuture',descript2='$descript2',linkGarage='$linkGarage' WHERE id = $gid";
+	$sql = "UPDATE " . $xoopsDB->prefix("garage") . " SET uid=$uid,cid=$cid,viewable=$viewable,name='$name',image='$image',imagechoice='$imagechoice',url='$url',location='$location',year='$year',make='$make',model='$model',style='$style',engine='$engine',color='$color',rt='$rt',sixty='$sixty',three='$three',eigth='$eigth',eigthm='$eigthm',thou='$thou',quart='$quart',quartm='$quartm',list='$list',mengine='$mengine',mexterior='$mexterior',minterior='$minterior',mrims='$mrims',maudio='$maudio',mfuture='$mfuture',descript2='$descript2',linkgarage='$linkgarage' WHERE id = $gid";
 		if ( !$result = $xoopsDB->query($sql) ) {
-			exit("$sql > SQL Error in function :: updateGarage($gid,$uid,$cid,$viewable,$name,$image,$imagechoice,$url,$location,$year,$make,$model,$style,$engine,$color,$rt,$sixty,$three,$eigth,$eigthm,$thou,$quart,$quartm,$list,$mengine,$mexterior,$minterior,$mrims,$maudio,$mfuture,$descript2,$linkGarage)");
+			exit("$sql > SQL Error in function :: updateGarage($gid,$uid,$cid,$viewable,$name,$image,$imagechoice,$url,$location,$year,$make,$model,$style,$engine,$color,$rt,$sixty,$three,$eigth,$eigthm,$thou,$quart,$quartm,$list,$mengine,$mexterior,$minterior,$mrims,$maudio,$mfuture,$descript2,$linkgarage)");
 		} else {
 			return 1;
 		}
 }
 
-function updateGaragePlusUpload($gid,$uid,$cid,$viewable,$name,$image,$uploadimage,$imagechoice="0",$url,$location,$year,$make,$model,$style,$engine,$color,$rt,$sixty,$three,$eigth,$eigthm,$thou,$quart,$quartm,$list,$mengine,$mexterior,$minterior,$mrims,$maudio,$mfuture,$descript2,$linkGarage){
+function updateGaragePlusUpload($gid,$uid,$cid,$viewable,$name,$image,$uploadimage,$imagechoice="0",$url,$location,$year,$make,$model,$style,$engine,$color,$rt,$sixty,$three,$eigth,$eigthm,$thou,$quart,$quartm,$list,$mengine,$mexterior,$minterior,$mrims,$maudio,$mfuture,$descript2,$linkgarage){
 	global $xoopsDB;
-	$sql = "UPDATE " . $xoopsDB->prefix("garage") . " SET uid=$uid,cid=$cid,viewable=$viewable,name='$name',image='$image',uploadimage='$uploadimage',imagechoice='$imagechoice',url='$url',location='$location',year='$year',make='$make',model='$model',style='$style',engine='$egine',color='$color',rt='$rt',sixty='$sixty',three='$three',eigth='$eigth',eigthm='$eigthm',thou='$thou',quart='$quart',quartm='$quartm',list='$list',mengine='$mengine',mexterior='$mexterior',minterior='$minterior',mrims='$mrims',maudio='$maudio',mfuture='$mfuture',descript2='$descript2',linkGarage='$linkGarage' WHERE id = $gid";
+	$sql = "UPDATE " . $xoopsDB->prefix("garage") . " SET uid=$uid,cid=$cid,viewable=$viewable,name='$name',image='$image',uploadimage='$uploadimage',imagechoice='$imagechoice',url='$url',location='$location',year='$year',make='$make',model='$model',style='$style',engine='$engine',color='$color',rt='$rt',sixty='$sixty',three='$three',eigth='$eigth',eigthm='$eigthm',thou='$thou',quart='$quart',quartm='$quartm',list='$list',mengine='$mengine',mexterior='$mexterior',minterior='$minterior',mrims='$mrims',maudio='$maudio',mfuture='$mfuture',descript2='$descript2',linkgarage='$linkgarage' WHERE id = $gid";
 		if ( !$result = $xoopsDB->query($sql) ) {
 			exit("$sql > SQL Error in function :: updateGaragePlusUpload($gid,$cid,$viewable,$name,$image,$url,$location,$year,$make,$model,$style,$engine,$color,$rt,$sixty,$three,$eigth,$eigthm,$thou,$quart,$quartm,$list)");
 
@@ -60,7 +60,7 @@ function updateGaragePlusUpload($gid,$uid,$cid,$viewable,$name,$image,$uploadima
 
 function doesGarageExist($uid){
 	global $xoopsDB;
-	$sql = "SELECT id FROM " . $xoopsDB->prefix("garage") . " WHERE uid=$uid LIMIT 1";
+	$sql = "SELECT id FROM " . $xoopsDB->prefix("garage") . " WHERE uid = '$uid' LIMIT 1";
 		if ( !$result = $xoopsDB->query($sql) ) {
 			exit("SQL Error in function :: doesGarageExist()");
 		}	
@@ -68,9 +68,37 @@ function doesGarageExist($uid){
 	return $xgid;
 }
 
+//Added by jlm69
+function getCatOptions($cid){
+	global $xoopsDB;
+	$sql = "SELECT cid,name,racing FROM " . $xoopsDB->prefix("garage_cats") . " WHERE cid = '$cid' ORDER BY name";
+		if ( !$result = $xoopsDB->query($sql) ) {
+			exit("$sql > SQL Error in function :: getCatOptions($cid)");
+		}
+			$cat_racing = array();
+			while ( $row = $xoopsDB->fetchArray($result) ) {
+			$cat_racing = $row;
+		}
+	return $cat_racing;
+		
+}
+
+function getCatName($cid){
+	global $xoopsDB;
+	$sql = "SELECT name FROM " . $xoopsDB->prefix("garage_cats") . " WHERE cid= '$cid'";
+		if ( !$result = $xoopsDB->query($sql) ) {
+			return;
+			//exit("SQL Error in function :: getRoster($cid)");
+		}	
+		$category_name = $xoopsDB->fetchArray($result);
+	return $category_name;
+}
+
+//end add
+
 function getCats($gid){
 	global $xoopsDB;
-	$sql = "SELECT cid,name FROM " . $xoopsDB->prefix("garage_cats") . " WHERE gid = $gid ORDER BY name";
+	$sql = "SELECT cid,name,racing FROM " . $xoopsDB->prefix("garage_cats") . " WHERE gid = $gid ORDER BY name";
 		if ( !$result = $xoopsDB->query($sql) ) {
 			exit("$sql > SQL Error in function :: getCats($gid)");
 		} else {
@@ -258,6 +286,20 @@ $editor_configs["height"] = "200px";
 	}
 
 	return $editor;
+}
+
+function garage_FieldExists($fieldname,$table)
+{
+	global $xoopsDB;
+	$result=$xoopsDB->queryF("SHOW COLUMNS FROM	$table LIKE '$fieldname'");
+	return($xoopsDB->getRowsNum($result) > 0);
+}
+
+function garage_AddField($field, $table)
+{
+	global $xoopsDB;
+	$result=$xoopsDB->queryF('ALTER TABLE ' . $table . " ADD $field;");
+	return $result;
 }
 
 ?>

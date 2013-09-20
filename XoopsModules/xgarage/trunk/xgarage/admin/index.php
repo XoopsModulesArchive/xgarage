@@ -120,11 +120,13 @@ switch($op){
 		//echo("testing123");
 		//adminMenu(4, _AM_GARAGES_CATEGORIES);
 		if($_POST['catname']){
-			$success = addCat($_POST['catname'],$_POST['gid']);
+			$cid = $_POST['cid'];
+			if(!isset($_POST['racing'])) $_POST['racing'] = 0;
+			$success = addCat($_POST['catname'],$_POST['racing'],$_POST['gid']);
 			if($success){
-				redirect_header("index.php?op=cats&cid=$cid", 1, _AM_CATEGORYADDED);
+				redirect_header("index.php?op=cats&cid=$cid", 5, _AM_CATEGORYADDED);
 				exit;
-			} else redirect_header("index.php?op=cats&cid=$cid", 1, _AM_CATEGORYADDERROR);
+			} else redirect_header("index.php?op=cats&cid=$cid", 5, _AM_CATEGORYADDERROR);
 		}
 		
 		break;
@@ -251,6 +253,7 @@ switch($op){
 		echo("<form method='post' action='index.php'>");
 			echo(_AM_NEWCATNAME."<input type='text' name='catname'><br/>"._AM_PARENT);
 			$cattree->makeMySelBox("name","",$cid,true,"gid");
+			echo("<br/>"._AM_XG_RACING."<input type='checkbox' name='racing' value='1'>");
 			echo("<input type='hidden' name='cid' value='$cid'>");
 			echo("<input type='hidden' name='op' value='add_cat'>");
 			echo("<br/><input type='submit' value='"._AM_ADDNEWCAT."'>");
@@ -294,11 +297,16 @@ switch($op){
 		break;
 	case "documentation":
 		xoops_cp_header();
-		adminMenu(5, _AM_GARAGES_DOCUMENTATION);
+		adminMenu(0, _AM_XG_DOCUMENTATION);
 
-		echo("<div style='text-align:center;'>"._AM_DOCS."<br/><br/><br/>");
-
-		echo("<br/><br/><br/><a href='http://www.xgarage.org'>Live Docs and support at X-Garage</a>");
+		echo("<div style='text-align:center;'>"._AM_GARAGES_DOCS."<br/><br/><br/>");
+		echo "<h1>"._AM_XG_DOC_HEAD."</h1>";
+echo "<hr>
+<p><a href="."docs_credits.php".">"._AM_XG_CREDITS."</a></p>
+<p><a href="."docs_admin.php".">"._AM_XG_ADMIN_MAN."</a> </p>
+<p><a href="."docs_user.php".">"._AM_XG_USER_MAN."</a></p>
+<p>&nbsp;</p>";
+		echo("<br/><br/><br/><a href='http://www.xgarage.org'>"._AM_XG_DOC_SUPPORT."</a>");
 		
 		
 		echo("</div>");
@@ -311,7 +319,7 @@ switch($op){
 		
 		echo("<div style='text-align:center;'>"._AM_SUPPORT."<br/><br/><br/>"._AM_SUPPORT_REGISTERED);
 		
-		echo("<br/><br/><br/><a href='http://www.xgarage.org/modules/newbb/'>Garages Module for XOOPS Support Forum</a>");
+		echo("<br/><br/><br/><a href='http://www.xgarage.org/modules/newbb/'>"._AM_XG_DOC_FORUM."</a>");
 		
 		
 		echo("</div>");
@@ -346,7 +354,7 @@ switch($op){
 			for($x=0;$x<count($names);$x++){
 				if($names[$x]['viewable']) $viewable="color:#000000;";
 				else $viewable="color:#cccccc;";
-				echo("<div style=\"margin-left:100px;\"><a style='$viewable' href=\"../index.php?op=view&gid=".$names[$x]['id']."\">".$names[$x]['name']."</a></div>");
+				echo("<div style=\"margin-left:100px;\"><a style='$viewable' href=\"../index.php?op=view&gid=".$names[$x]['id']."\">".$names[$x]['year']." - ".$names[$x]['make']." - ".$names[$x]['model']." - ".$names[$x]['style']."</a></div>");
 			}
 		else echo("<div>"._AM_NONEACTIVE."</div>");
 		break;
