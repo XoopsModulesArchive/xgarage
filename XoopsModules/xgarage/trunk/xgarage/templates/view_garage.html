@@ -1,0 +1,155 @@
+<{if $garage}>
+<table width="100%" cellspacing="2" cellpadding="2" border="0" align="center">
+  <tr>
+        <td style="font-size:small;">
+		<{if $index}><a href="index.php"><img src="images/icons/index.png" align="middle" title="[<{$index}>]" alt="[&lt;{$index}&gt;]"></a><{/if}>
+		
+		<{if $panel == true}>
+			<{if $editgarage}><a href="garage.php?op=edit&gid=<{$gid}>"><img src="images/icons/edit.png" align="middle" title="[<{$editgarage}>]" alt="[&lt;{$editgarage}&gt;]"></a><{/if}>
+			<{if $approvegarage}><a href="admin/index.php?op=approve&gid=<{$gid}>"><img src="images/icons/approve.png" align="middle" title="[<{$approvegarage}>]" alt="[&lt;{$approvegarage}&gt;]"> </a><{/if}>
+			<{if $disablegarage}><a href="admin/index.php?op=disable&gid=<{$gid}>"><img src="images/icons/disable.png" align="middle" title="[<{$disablegarage}>]" alt="[&lt;{$disablegarage}&gt;]"></a><{/if}>
+			<{if $enablegarage}><a href="admin/index.php?op=enable&gid=<{$gid}>"><img src="images/icons/enable.png" align="middle" title="[<{$enablegarage}>]" alt="[&lt;{$enablegarage}&gt;]"></a><{/if}>
+			<{if $deletegarage}><a href="admin/index.php?op=delgarage&gid=<{$gid}>"><img src="images/icons/delete.png" align="middle" title="[<{$deletegarage}>]" alt="[&lt;{$deletegarage}&gt;]"></a><{/if}>
+			<{if $adminlink}><a href="../../modules/garage/admin/index.php"><img src="images/icons/admin.png" align="middle" title="[<{$adminlink}>]" alt="[&lt;{$adminlink}&gt;]"></a><{/if}>
+		
+		<{/if}></td>
+  </tr>
+</table>
+
+<table width="100%" border="0" align="center" cellpadding="3" cellspacing="1" summary="" class="forumline">
+        <tr>
+                <th height="25" nowrap colspan="2" class="thHead">The Garage of :: <{$garage.name}></th>
+        </tr>
+        <tr>
+                <td width="40%" height="28" align="center" class="catLeft"><b><span class="gen">Owner Info</span></b></td>
+                <td width="60%" align="center" class="catRight"><b><span class="gen">Best quart mile times</span></b></td>
+        </tr>
+        <tr>
+                <td align="center" valign="top" class="row1"><span class="gen"><{if $garage.linkgarage}><br/><a href="../../userinfo.php?uid=<{$garage.uid}>"><{$linkgarage}></a><{/if}><br />
+                  <{$uname}>:&nbsp;<B><{$uname}></b><br />
+                <{$location}>:&nbsp;<{$garage.location}></span></td>
+                <td valign="top" rowspan="3" class="row1"><table width="100%" border="0" cellspacing="1" cellpadding="3">
+                <tr>
+                  <td valign="middle" align="right" nowrap="nowrap"><span class="gen"><{$rt}>:</span></td>
+                  <td valign="top" width="100%"><b><span class="gen"><{$garage.rt}></span></b></td>
+                </tr>
+                <tr>
+                  <td valign="middle" align="right" nowrap="nowrap"><span class="gen"><{$sixty}>:</span></td>
+                  <td valign="top" width="100%"><b><span class="gen"><{$garage.sixty}></span></b></td>
+                </tr>
+                <tr>
+                  <td valign="middle" align="right" nowrap="nowrap"><span class="gen"><{$three}>:</span></td>
+                  <td><b><span class="gen"><{$garage.three}></span></b></td>
+                </tr>
+                <tr>
+                  <td valign="middle" align="right" nowrap="nowrap"><span class="gen"><{$eigth}>:</span></td>
+                  <td><span class="gen"><b><{$garage.eigth}></b></span></td>
+                </tr>
+                <tr>
+                  <td valign="middle" align="right" nowrap="nowrap"><span class="gen"><{$eigthm}>:</span></td>
+                  <td><b><span class="gen"><{$garage.eigthm}></span></b></td>
+                </tr>
+                <tr>
+                  <td valign="top" align="right" nowrap="nowrap"><span class="gen"><{$thou}>:</span></td>
+                  <td> <b><span class="gen"><{$garage.thou}></span></b></td>
+                </tr>
+                <tr>
+                  <td valign="top" align="right" nowrap="nowrap"><span class="gen"><{$quart}>:</span></td>
+                  <td> <b><span class="gen"><{$garage.quart}></span></b></td>
+                </tr>
+                <tr>
+                  <td valign="top" align="right" nowrap="nowrap"><span class="gen"><{$quartm}>:</span></td>
+                  <td> <b><span class="gen"><{$garage.quartm}></span></b></td>
+                </tr>
+
+          </table></td>
+        </tr>
+        <tr>
+            <td width="40%" height="28" align="center" class="catLeft"><b><span class="gen">Garaged Info</span></b></td>
+        </tr>
+        <tr>
+                <td height="28" valign="top" class="row1"><table width="100%" border="0" cellspacing="1" cellpadding="3">
+                <tr>
+                  <td valign="middle" align="right" nowrap="nowrap"><span class="gen"><{$mark}>:</span></td>
+                  <td class="row1" valign="middle" width="100%"><b><span class="gen"><{$garage.mark}></span></b></td>
+                </tr>
+                <tr>
+                  <td valign="middle" nowrap="nowrap" align="right"><span class="gen"><{$model}>:</span></td>
+                  <td class="row1" valign="middle"><span class="gen"><B><{$garage.model}></b></span></td>
+                </tr>
+                <tr>
+                  <td valign="middle" nowrap="nowrap" align="right"><span class="gen"><{$year}>:</span></td>
+                  <td class="row1" valign="middle"><span class="gen"><b><{$garage.year}></b></span></td>
+                </tr>
+                <tr>
+                  <td valign="middle" nowrap="nowrap" align="right"><span class="gen"><{$engine}>:</span></td>
+                  <td class="row1" valign="middle"><span class="gen"><b><{$garage.engine}></b></span></td>
+                </tr>
+                <tr>
+                  <td valign="middle" nowrap="nowrap" align="right"><span class="gen"><{$color}>:</span></td>
+                  <td class="row1" valign="middle"><span class="gen"><b><{$garage.color}></b></span></td>
+                </tr>
+          </table></td>
+        </tr>
+        <tr>
+                <td height="28" align="center" class="catLeft"><b><span class="gen">Modifications</span></b></td>
+                <td height="28" align="left" class="catRight"><b><span class="gen"></span></b></td>
+        </tr>
+        <tr>
+                <td valign="top" class="row1" align="left"><span class="gen"><{$mengine}>:<hr><center><b><{$garage.mengine}><hr></b></center><br /> <{$mexterior}>:<hr><center><b><{$garage.meterior}></b><hr></center><br /><{$minterior}>: <hr><center><b><{$garage.minterior}></b><hr></center><br /> <{$mrims}>: <hr><center><b><{$garage.mrims}></b><hr></center><br /><{$maudio}>: <hr><center><b><{$garage.maudio}></b><hr></center><br /><{$mfuture}>: <hr><center><b><{$garage.mfuture}></b><hr></center>
+</span></td>
+          <td valign="top" class="row1"><table width="100%" cellpadding="2" cellspacing="1" border="0" class="forumline">
+  <!-- BEGIN no_pics -->
+  <tr>
+   <td class="row1" align="center" height="50"><span class="gen">Garage Gallery</span></td>
+  </tr>
+  <!-- END no_pics -->
+  <!-- BEGIN picrow -->
+  <tr>
+  <!-- BEGIN piccol -->
+   <td align="center" width="{S_COL_WIDTH}" class="row1"><span class="genmed"><{if $path}><{$path}><{/if}>
+	<{if $garage.image}><{$garage.image}><{/if}></a></span></td>
+  <!-- END piccol -->
+  </tr>
+  <tr>
+  <!-- BEGIN pic_detail -->
+   <td class="row2">
+   <p><{$garage.descript}></p>
+   <{if $more}><a href="index.php?op=view&gid=<{$gid}>&subop=more#more"><{$more}></a><{/if}>
+	<{if $showmore}>
+		<a name="more"></a>
+		<p><{$garage.descript2}></p>
+	<{/if}>
+<{/if}>
+   </td>
+  <!-- END pic_detail -->
+  </tr>
+  <!-- END picrow -->
+</table></td>
+        </tr>
+</table>
+<table align="center">
+<tr>
+<td><a href="http://www.xgarage.org" class="mainmenu"><font size="2px">XGarage Car Profile</font></a>
+</td>
+</tr>
+</table>
+
+<{if $allowcomments == 1}>
+	<div style="text-align: center; padding: 3px; margin: 3px;">
+	  <{$commentsnav}>
+	  <{$lang_notice}>
+	</div>
+	
+	<div style="margin: 3px; padding: 3px;">
+	<!-- start comments loop -->
+	<{if $comment_mode == "flat"}>
+	  <{include file="db:system_comments_flat.html"}>
+	<{elseif $comment_mode == "thread"}>
+	  <{include file="db:system_comments_thread.html"}>
+	<{elseif $comment_mode == "nest"}>
+	  <{include file="db:system_comments_nest.html"}>
+	<{/if}>
+	<!-- end comments loop -->
+	</div>
+<{/if}>

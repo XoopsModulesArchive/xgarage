@@ -1,0 +1,22 @@
+<div style="font-size:small;">
+<a href="index.php"><img src="images/icons/index.png" align="middle" title="[<{$index}>]" alt="[<{$index}>]"></a>
+<{if $addnewgarage}><a href="garage.php?op=add<{if $cid}>&cid=<{$cid}><{/if}>"><img src="images/icons/add.png" align="middle" title="[<{$addnewgarage}>]" alt="[<{$addnewgarage}>]"></a><{/if}>
+<{if $panel == true}>
+	<{if $adminlink}><a href="../../modules/garage/admin/index.php"><img src="images/icons/admin.png" align="middle" title="[<{$adminlink}>]" alt="[<{$adminlink}>]"></a><{/if}>
+<{/if}>
+<{if $itemTotal}><{$itemTotal}><{/if}>
+</div>
+<{if $path}><{$path}><{/if}>
+<{if $cats}>
+	<{foreach item=cat from=$cats}>
+		<div style="margin-left:75px;"><a href="index.php?cid=<{$cat.cid}>"><{$cat.name}>(<{$cat.count}>)</a></div>
+	<{/foreach}>
+<{/if}>
+
+<{if $names}>
+	<h1><{$header}></h1>
+	<{foreach item=name from=$names}>
+		<div style="margin-left:100px;"><a href="index.php?op=view&gid=<{$name.id}>"><{$name.name}></a></div>
+	<{/foreach}>
+<{/if}>
+
