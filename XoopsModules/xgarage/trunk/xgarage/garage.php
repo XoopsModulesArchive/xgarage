@@ -1,5 +1,29 @@
 <?php
 require('header.php');
+
+
+//Group Perms added by jlm69
+$module_id = $xoopsModule->getVar('mid');
+
+if (is_object($xoopsUser)) {
+$groups = $xoopsUser->getGroups();
+} else {
+$groups = XOOPS_GROUP_ANONYMOUS;
+}
+$gperm_handler =& xoops_gethandler('groupperm');
+if (isset($_POST['item_id'])) {
+$perm_itemid = intval($_POST['item_id']);
+} else {
+$perm_itemid = 0;
+}
+//If no access
+if (!$gperm_handler->checkRight("garage_submit", $perm_itemid, $groups, $module_id)) {
+ redirect_header(XOOPS_URL."/index.php", 3, _NOPERM);
+exit();
+}
+// End Group Perms
+
+
 require(XOOPS_ROOT_PATH.'/header.php');
 
 include("include/functions.php");
@@ -8,10 +32,12 @@ settype($cid, "integer");
 settype($url, "string");
 settype($name, "string");
 settype($image, "string");
+settype($imagechoice, "string");
 settype($location, "string");
+settype($year, "string");
 settype($make, "string");
 settype($model, "string");
-settype($year, "string");
+settype($style, "string");
 settype($engine, "string");
 settype($color, "string");
 settype($rt, "string");
@@ -79,9 +105,10 @@ switch ($op){
 			
 			$url = $myts->makeTboxData4Save($_POST['url']);
 			$location = $myts->makeTboxData4Save($_POST['location']);
+			$year = $myts->makeTboxData4Save($_POST['year']);
 			$make = $myts->makeTboxData4Save($_POST['make']);
 			$model = $myts->makeTboxData4Save($_POST['model']);
-			$year = $myts->makeTboxData4Save($_POST['year']);
+			$style = $myts->makeTboxData4Save($_POST['style']);
 			$engine = $myts->makeTboxData4Save($_POST['engine']);
 			$color = $myts->makeTboxData4Save($_POST['color']);
 			$rt = $myts->makeTboxData4Save($_POST['rt']);
@@ -106,7 +133,31 @@ switch ($op){
 			
 			include("image_uploader.php");
 			
-			$success = addGarage($a,$uid,$cid,$name,$image,$imageupload,$imagechoice,$url,$location,$make,$model,$year,$engine,$color,$rt,$sixty,$three,$eigth,$eigthm,$thou,$quart,$quartm,$list,$mengine,$mexterior,$minterior,$mrims,$maudio,$mfuture,$descript2,$linkgarage);
+			$success = addGarage($a,$uid,$cid,$name,$image,$imageupload,$imagechoice,$url,$location,$year,$make,$model,$style,$engine,$color,$rt,$sixty,$three,$eigth,$eigthm,$thou,$quart,$quartm,$list,$mengine,$mexterior,$minterior,$mrims,$maudio,$mfuture,$descript2,$linkgarage);
+
+
+if($success) {
+$notification_handler =& xoops_gethandler('notification');
+$id = $xoopsDB->getInsertId();
+$tags=array();
+$tags['YEAR'] = $year;
+$tags['MAKE'] = $make;
+$tags['MODEL'] = $model;
+$tags['LINK_URL'] = XOOPS_URL . '/modules/garage/index.php?op=view&gid=' . addslashes($id);
+$sql = "SELECT name FROM " . $xoopsDB->prefix("garage_cats") . " WHERE cid=" . addslashes($_POST['cid']);
+$result2 = $xoopsDB->query($sql);
+$row = $xoopsDB->fetchArray($result2);
+
+$tags['CATEGORY_TITLE'] = $row['name'];
+$tags['CATEGORY_URL'] = XOOPS_URL . '/modules/garage/index.php?cid="' . addslashes($cid);
+$notification_handler =& xoops_gethandler('notification');
+$notification_handler->triggerEvent('global', 0, 'new_listing', $tags);
+$notification_handler->triggerEvent('category', $cid, 'new_listing', $tags);
+$notification_handler->triggerEvent ('listing', $gid, 'new_listing', $tags );
+
+
+}
+
 			if($success) redirect_header("index.php",2,_MD_XG_ADDSUCCESS);
 			else redirect_header("index.php",2,_MD_XG_ADDFAILURE);
 		} else redirect_header("index.php",2,_MD_XG_ADDFAILURE);
@@ -133,9 +184,10 @@ switch ($op){
 		if(!$imagechoice) $imagechoice = "0";
 		$url = $myts->makeTboxData4Save($_POST['url']);
 		$location = $myts->makeTboxData4Save($_POST['location']);
+		$year = $myts->makeTboxData4Save($_POST['year']);
 		$make = $myts->makeTboxData4Save($_POST['make']);
 		$model = $myts->makeTboxData4Save($_POST['model']);
-		$year = $myts->makeTboxData4Save($_POST['year']);
+		$style = $myts->makeTboxData4Save($_POST['style']);
 		$engine = $myts->makeTboxData4Save($_POST['engine']);
 		$color = $myts->makeTboxData4Save($_POST['color']);
 		$rt = $myts->makeTboxData4Save($_POST['rt']);
@@ -163,8 +215,8 @@ switch ($op){
 		if($errmsg) $wtime = 15;
 		else $wtime = 3;
 		if(($uid == $puid && $xoopsModuleConfig['canuseredit']) || $userIsAdmin){
-			if($msg) $success = updateGaragePlusUpload($gid,$ouid,$cid,$viewable,$name,$image,$uploadimage,$imagechoice,$url,$location,$make,$model,$year,$engine,$color,$rt,$sixty,$three,$eigth,$eigthm,$thou,$quart,$quartm,$list,$mengine,$mexterior,$minterior,$mrims,$maudio,$mfuture,$descript2,$linkgarage);
-			else $success = updateGarage($gid,$ouid,$cid,$viewable,$name,$image,$imagechoice,$url,$location,$make,$model,$year,$engine,$color,$rt,$sixty,$three,$eigth,$eigthm,$thou,$quart,$quartm,$list,$mengine,$mexterior,$minterior,$mrims,$maudio,$mfuture,$descript2,$linkgarage);
+			if($msg) $success = updateGaragePlusUpload($gid,$ouid,$cid,$viewable,$name,$image,$uploadimage,$imagechoice,$url,$location,$year,$make,$model,$style,$engine,$color,$rt,$sixty,$three,$eigth,$eigthm,$thou,$quart,$quartm,$list,$mengine,$mexterior,$minterior,$mrims,$maudio,$mfuture,$descript2,$linkgarage);
+			else $success = updateGarage($gid,$ouid,$cid,$viewable,$name,$image,$imagechoice,$url,$location,$year,$make,$model,$style,$engine,$color,$rt,$sixty,$three,$eigth,$eigthm,$thou,$quart,$quartm,$list,$mengine,$mexterior,$minterior,$mrims,$maudio,$mfuture,$descript2,$linkgarage);
 
 			if($success) redirect_header("index.php?op=view&gid=$gid",$wtime,_MD_XG_UPDATESUCCESS.$errmsg.$msg);
 			else redirect_header("index.php?op=view&gid=$gid",$wtime,_MD_XG_UPDATEFAILURE.$errmsg.$msg);
@@ -195,7 +247,6 @@ switch ($op){
 				}
 			}
 		}
-
 		if(!$url) $url = "http://";
 		include XOOPS_ROOT_PATH."/class/xoopsformloader.php";
 		$sform = new XoopsThemeForm(_MD_XG_ADDGARAGE, "garageform", xoops_getenv('PHP_SELF'));
@@ -227,9 +278,10 @@ switch ($op){
 		}
 		$sform->addElement(new XoopsFormText(_MD_XG_URL, 'url', 50, 255, $url), false);
 		$sform->addElement(new XoopsFormText(_MD_XG_LOCATION, 'location', 50, 75, $location), false);
+		$sform->addElement(new XoopsFormText(_MD_XG_YEAR, 'year', 50, 75, $year), false);
 		$sform->addElement(new XoopsFormText(_MD_XG_MAKE, 'make', 50, 75, $make), false);
 		$sform->addElement(new XoopsFormText(_MD_XG_MODEL, 'model', 50, 75, $model), false);
-		$sform->addElement(new XoopsFormText(_MD_XG_YEAR, 'year', 50, 75, $year), false);
+		$sform->addElement(new XoopsFormText(_MD_XG_STYLE, 'style', 50, 75, $style), false);
 		$sform->addElement(new XoopsFormText(_MD_XG_ENGINE, 'engine', 50, 75, $engine), false);
 		$sform->addElement(new XoopsFormText(_MD_XG_COLOR, 'color', 50, 75, $color), false);
 		$sform->addElement(new XoopsFormText(_MD_XG_RT, 'rt', 50, 75, $rt), false);
@@ -241,13 +293,13 @@ switch ($op){
 		$sform->addElement(new XoopsFormText(_MD_XG_QUART, 'quart', 50, 75, $quart), false);
 		$sform->addElement(new XoopsFormText(_MD_XG_QUARTM, 'quartm', 50, 75, $quartm), false);
 		$sform->addElement(new XoopsFormText($xoopsModuleConfig['listname'], 'list', 50, 255, $list), false);
-		$sform->addElement(new XoopsFormDhtmlTextArea(_MD_XG_MENGINE, 'mengine', $mengine, 20, 40), true);
-		$sform->addElement(new XoopsFormDhtmlTextArea(_MD_XG_MEXTERIOR, 'mexterior', $mexterior, 20, 40), true);
-		$sform->addElement(new XoopsFormDhtmlTextArea(_MD_XG_MINTERIOR, 'minterior', $minterior, 20, 40), true);
-		$sform->addElement(new XoopsFormDhtmlTextArea(_MD_XG_MRIMS, 'mrims', $mrims, 20, 40), true);
-		$sform->addElement(new XoopsFormDhtmlTextArea(_MD_XG_MAUDIO, 'maudio', $maudio, 20, 40), true);
-		$sform->addElement(new XoopsFormDhtmlTextArea(_MD_XG_MFUTURE, 'mfuture', $mfuture, 20, 40), true);
-		if($xoopsModuleConfig['usedescript2']) $sform->addElement(new XoopsFormDhtmlTextArea(_MD_XG_DESCRIPT2, 'descript2', $descript2, 20, 40), false);
+		$sform->addElement(getEditor(_MD_XG_MENGINE, 'mengine', $mengine, 10, 40), true);
+		$sform->addElement(getEditor(_MD_XG_MEXTERIOR, 'mexterior', $mexterior, 10, 40), true);
+		$sform->addElement(getEditor(_MD_XG_MINTERIOR, 'minterior', $minterior, 10, 40), true);
+		$sform->addElement(getEditor(_MD_XG_MRIMS, 'mrims', $mrims, 10, 40), true);
+		$sform->addElement(getEditor(_MD_XG_MAUDIO, 'maudio', $maudio, 10, 40), true);
+		$sform->addElement(getEditor(_MD_XG_MFUTURE, 'mfuture', $mfuture, 10, 40), true);
+		if($xoopsModuleConfig['usedescript2']) $sform->addElement(getEditor(_MD_XG_DESCRIPT2, 'descript2', $descript2, 10, 40), false);
 		if($xoopsModuleConfig['linkgarage']){
 			$linkgarage_choice = new XoopsFormRadio(_MD_XG_LINKGARAGE,'linkgarage',$linkgarage);
 			$linkgarage_choice->addOption(0,_MD_XG_NOLINKTOUSER);
@@ -276,9 +328,10 @@ switch ($op){
 		$imagechoice = $garage['imagechoice'];
 		$url = $garage['url'];
 		$location = $garage['location'];
+		$year = $garage['year'];
 		$make = $garage['make'];
 		$model = $garage['model'];
-		$year = $garage['year'];
+		$style = $garage['style'];
 		$engine = $garage['engine'];
 		$color = $garage['color'];
 		$rt = $garage['rt'];
@@ -335,9 +388,10 @@ switch ($op){
 			} 
 			$sform->addElement(new XoopsFormText(_MD_XG_URL, 'url', 50, 255, $url), false);
 			$sform->addElement(new XoopsFormText(_MD_XG_LOCATION, 'location', 50, 75, $location), false);
+			$sform->addElement(new XoopsFormText(_MD_XG_YEAR, 'year', 50, 75, $year), false);
 			$sform->addElement(new XoopsFormText(_MD_XG_MAKE, 'make', 50, 75, $make), false);
 			$sform->addElement(new XoopsFormText(_MD_XG_MODEL, 'model', 50, 75, $model), false);
-			$sform->addElement(new XoopsFormText(_MD_XG_YEAR, 'year', 50, 75, $year), false);
+			$sform->addElement(new XoopsFormText(_MD_XG_STYLE, 'style', 50, 75, $style), false);
 			$sform->addElement(new XoopsFormText(_MD_XG_ENGINE, 'engine', 50, 75, $engine), false);
 			$sform->addElement(new XoopsFormText(_MD_XG_COLOR, 'color', 50, 75, $color), false);
 			$sform->addElement(new XoopsFormText(_MD_XG_RT, 'rt', 50, 75, $rt), false);
@@ -349,13 +403,13 @@ switch ($op){
 			$sform->addElement(new XoopsFormText(_MD_XG_QUART, 'quart', 50, 75, $quart), false);
 			$sform->addElement(new XoopsFormText(_MD_XG_QUARTM, 'quartm', 50, 75, $quartm), false);
 			$sform->addElement(new XoopsFormText($xoopsModuleConfig['listname'], 'list', 50, 255, $list), false);
-			$sform->addElement(new XoopsFormDhtmlTextArea(_MD_XG_MENGINE, 'mengine', $mengine, 20, 40), true);
-			$sform->addElement(new XoopsFormDhtmlTextArea(_MD_XG_MEXTERIOR, 'mexterior', $mexterior, 20, 40), true);
-			$sform->addElement(new XoopsFormDhtmlTextArea(_MD_XG_MINTERIOR, 'minterior', $minterior, 20, 40), true);
-			$sform->addElement(new XoopsFormDhtmlTextArea(_MD_XG_MRIMS, 'mrims', $mrims, 20, 40), true);
-			$sform->addElement(new XoopsFormDhtmlTextArea(_MD_XG_MAUDIO, 'maudio', $maudio, 20, 40), true);
-			$sform->addElement(new XoopsFormDhtmlTextArea(_MD_XG_MFUTURE, 'mfuture', $mfuture, 20, 40), true);
-			if($xoopsModuleConfig['usedescript2']) $sform->addElement(new XoopsFormDhtmlTextArea(_MD_XG_DESCRIPT2, 'descript2', $descript2, 20, 40), false);
+			$sform->addElement(getEditor(_MD_XG_MENGINE, 'mengine', $mengine, 20, 40), true);
+			$sform->addElement(getEditor(_MD_XG_MEXTERIOR, 'mexterior', $mexterior, 20, 40), true);
+			$sform->addElement(getEditor(_MD_XG_MINTERIOR, 'minterior', $minterior, 20, 40), true);
+			$sform->addElement(getEditor(_MD_XG_MRIMS, 'mrims', $mrims, 20, 40), true);
+			$sform->addElement(getEditor(_MD_XG_MAUDIO, 'maudio', $maudio, 20, 40), true);
+			$sform->addElement(getEditor(_MD_XG_MFUTURE, 'mfuture', $mfuture, 20, 40), true);
+			if($xoopsModuleConfig['usedescript2']) $sform->addElement(getEditor(_MD_XG_DESCRIPT2, 'descript2', $descript2, 20, 40), false);
 			if($xoopsModuleConfig['linkgarage']){
 				$linkgarage_choice = new XoopsFormRadio(_MD_XG_LINKGARAGE,'linkgarage',$linkgarage);
 				$linkgarage_choice->addOption(0,_MD_XG_NOLINKTOUSER);
@@ -378,7 +432,7 @@ switch ($op){
 					$redirect_url = "index.php";
 					$redirect_msg = _MD_XG_CANNOTCHANGE;
 				}
-				redirect_header($redirect_url,2,$redirect_msg);
+				redirect_header($redirect_url,8,$redirect_msg);
 				exit;
 			}
 		}

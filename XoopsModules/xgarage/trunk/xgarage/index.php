@@ -2,7 +2,33 @@
 //if (!defined('XOOPS_XMLRPC')) define('XOOPS_XMLRPC', 1);
 
 require('header.php');
-require(XOOPS_ROOT_PATH.'/header.php');
+
+
+// Group Permissions added by jlm69
+$module_id = $xoopsModule->getVar('mid');
+
+if (is_object($xoopsUser)) {
+$groups = $xoopsUser->getGroups();
+} else {
+$groups = XOOPS_GROUP_ANONYMOUS;
+}
+$gperm_handler =& xoops_gethandler('groupperm');
+
+if (isset($_POST['item_id'])) {
+$perm_itemid = intval($_POST['item_id']);
+} else {
+$perm_itemid = 0;
+}
+//If no access
+if (!$gperm_handler->checkRight("garage_view", $perm_itemid, $groups, $module_id)) {
+redirect_header(XOOPS_URL."/index.php", 3, _NOPERM);
+exit();
+}
+// End Group Permissions
+
+
+
+//require(XOOPS_ROOT_PATH.'/header.php');
 
 include("include/functions.php");
 
@@ -11,6 +37,7 @@ settype($uid,"integer");
 settype($garage,"array");
 settype($itemTotal,"string");
 $self = $_SERVER['PHP_SELF'];
+
 global $xoopsModuleConfig;
 global $xoopsUser;
 
@@ -27,27 +54,37 @@ switch ($op){
 
 	case "view":
 		$xoopsOption['template_main'] = "view_garage.html";
+		include XOOPS_ROOT_PATH."/header.php";
 		if($gid){
 			$garage = getGarage($gid);
-			if($garage['imagechoice']) $garage['image'] = "[img align=right]". XOOPS_UPLOAD_URL. "/" . "garage/".$garage['uploadimage']."[/img]";
+			if($garage['imagechoice']) {
+$garage['image'] = "[img align=right]". XOOPS_UPLOAD_URL. "/" . "garage/".$garage['uploadimage']."[/img]";
 		}
+	}
+
+		
+		
+		
+		 
+
 		$myts =& MyTextSanitizer::getInstance(); // MyTextSanitizer object
-		$garage['mengine'] = $myts->displayTarea($garage['mengine'], 0, 1, 1, 1, 1);
-		$garage['mexterior'] = $myts->displayTarea($garage['mexterior'], 0, 1, 1, 1, 1);
-		$garage['minterior'] = $myts->displayTarea($garage['minterior'], 0, 1, 1, 1, 1);
-		$garage['mrims'] = $myts->displayTarea($garage['mrims'], 0, 1, 1, 1, 1);
-		$garage['maudio'] = $myts->displayTarea($garage['maudio'], 0, 1, 1, 1, 1);
-		$garage['mfuture'] = $myts->displayTarea($garage['mfuture'], 0, 1, 1, 1, 1);
-		$garage['descript2'] = $myts->displayTarea($garage['descript2'], 0, 1, 1, 1, 1);
+		$garage['mengine'] = $myts->displayTarea($garage['mengine'], 1, 1, 1, 1, 1);
+		$garage['mexterior'] = $myts->displayTarea($garage['mexterior'], 1, 1, 1, 1, 1);
+		$garage['minterior'] = $myts->displayTarea($garage['minterior'], 1, 1, 1, 1, 1);
+		$garage['mrims'] = $myts->displayTarea($garage['mrims'], 1, 1, 1, 1, 1);
+		$garage['maudio'] = $myts->displayTarea($garage['maudio'], 1, 1, 1, 1, 1);
+		$garage['mfuture'] = $myts->displayTarea($garage['mfuture'], 1, 1, 1, 1, 1);
+		$garage['descript2'] = $myts->displayTarea($garage['descript2'], 1, 1, 1, 1, 1);
 		if($garage['descript2']){
 			if($subop == "more") $xoopsTpl->assign('showmore', true);
 			else $xoopsTpl->assign('more', _MD_XG_MORE);
 		} 
 		$garage['image'] = $myts->displayTarea($garage['image'], 0, 0, 1, 1, 0);
 		$garage['location'] = $myts->displayTarea($garage['location'], 0, 0, 0, 0, 0);
+		$garage['year'] = $myts->displayTarea($garage['year'], 0, 0, 0, 0, 0);
 		$garage['make'] = $myts->displayTarea($garage['make'], 0, 0, 0, 0, 0);
 		$garage['model'] = $myts->displayTarea($garage['model'], 0, 0, 0, 0, 0);
-		$garage['year'] = $myts->displayTarea($garage['year'], 0, 0, 0, 0, 0);
+		$garage['style'] = $myts->displayTarea($garage['style'], 0, 0, 0, 0, 0);
 		$garage['engine'] = $myts->displayTarea($garage['engine'], 0, 0, 0, 0, 0);
 		$garage['color'] = $myts->displayTarea($garage['color'], 0, 0, 0, 0, 0);
 		$garage['rt'] = $myts->displayTarea($garage['rt'], 0, 0, 0, 0, 0);
@@ -59,6 +96,7 @@ switch ($op){
 		$garage['quart'] = $myts->displayTarea($garage['quart'], 0, 0, 0, 0, 0);
 		$garage['quartm'] = $myts->displayTarea($garage['quartm'], 0, 0, 0, 0, 0);
 		$garage['list'] = $myts->displayTarea($garage['list'], 0, 0, 0, 0, 0);
+		
 		if($garage['list']){
 			if($xoopsModuleConfig['listformat']) {
 				$garage['list2'] = explode(",",$garage['list']);
@@ -84,7 +122,9 @@ switch ($op){
 				exit;
 			}
 		}
-		
+
+		$garage['uname'] = xoops_getLinkedUnameFromId($garage['uid']);
+
 		if(($uid == $garage['uid'] && $xoopsModuleConfig['canuseredit']) || ($xoopsModuleConfig['canadminsedit'] && $userIsAdmin)){
 			$xoopsTpl->assign('panel', true);
 			$xoopsTpl->assign('editgarage',_MD_XG_EDITGARAGE);
@@ -103,7 +143,7 @@ switch ($op){
 		if($xoopsModuleConfig['usecats']){
 			include_once XOOPS_ROOT_PATH."/class/xoopstree.php";
 			$cattree = new XoopsTree($xoopsDB->prefix("garage_cats"),"cid","gid");
-			$path = $cattree->getNicePathFromId($garage['cid'], "name", $self."?op=default");		
+			$path = $cattree->getNicePathFromId($cid, "name", $self."?op=default");		
 			$xoopsTpl->assign('path',$path);
 		}
 		
@@ -111,13 +151,15 @@ switch ($op){
 		$xoopsTpl->assign('allowcomments', $xoopsModuleConfig['allowcomments']);
 		$xoopsTpl->assign('gid', $gid);
 		$xoopsTpl->assign('gname', _MD_XG_GNAME);
+		$xoopsTpl->assign('ownername', _MD_XG_USERNAME);
 		$xoopsTpl->assign('garage', $garage);
 		$xoopsTpl->assign('list', $xoopsModuleConfig['listname']);
 		$xoopsTpl->assign('website', _MD_XG_PWEBSITE);
 		$xoopsTpl->assign('location', _MD_XG_PLOCATION);
+		$xoopsTpl->assign('year', _MD_XG_YEAR);
 		$xoopsTpl->assign('make', _MD_XG_MAKE);
 		$xoopsTpl->assign('model', _MD_XG_MODEL);
-		$xoopsTpl->assign('year', _MD_XG_YEAR);
+		$xoopsTpl->assign('style', _MD_XG_STYLE);
 		$xoopsTpl->assign('engine', _MD_XG_ENGINE);
 		$xoopsTpl->assign('color', _MD_XG_COLOR);
 		$xoopsTpl->assign('rt', _MD_XG_RT);
@@ -136,6 +178,8 @@ switch ($op){
 		$xoopsTpl->assign('mrims',_MD_XG_MRIMS);
 		$xoopsTpl->assign('maudio',_MD_XG_MAUDIO);
 		$xoopsTpl->assign('mfuture',_MD_XG_MFUTURE);
+		
+		
 
 		if($xoopsModuleConfig['allowcomments']) include XOOPS_ROOT_PATH.'/include/comment_view.php';		
 		break;
@@ -143,6 +187,7 @@ switch ($op){
 	case "default":
 	default:
 		$xoopsOption['template_main'] = "cat_index.html";
+		include XOOPS_ROOT_PATH."/header.php";
 		//$xoopsOption['template_main'] = "roster.html";
 
 		if(($xoopsModuleConfig['canuseredit']) || ($xoopsModuleConfig['canadminsedit'] && $userIsAdmin)){
@@ -164,7 +209,6 @@ switch ($op){
 		$xoopsTpl->assign('itemTotal',$totalItems);
 		
 		if($xoopsModuleConfig['usecats']){
-			
 			$path = $cattree->getNicePathFromId($cid, "name", $self."?op=default");		
 			$xoopsTpl->assign('path',$path);
 			$xoopsTpl->assign('cid',$cid);

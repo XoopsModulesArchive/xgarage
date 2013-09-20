@@ -59,6 +59,18 @@ define("_AM_GARAGEENABLED","Garage has been enabled.");
 define("_AM_DISABLEFAILURE","There was an error with disbaling this garage.");
 define("_AM_ENABLEFAILURE","There was an error with enabling this garage.");
 
-define("_AM_APPROVESUCCESS","Garage Approved.");
-define("_AM_APPROVEFAILURE","There was an error with approving this garage.");
+// Added for group permissions
+define("_AM_GARAGES_PERMISSIONS","Permissions");
+define('_AM_GARAGES_PERMADDNG', 'Could not add %s permission to %s for group %s');
+define('_AM_GARAGES_PERMADDOK','Added %s permission to %s for group %s');
+define('_AM_GARAGES_PERMRESETNG','Could not reset group permission for module %s');
+define('_AM_GARAGES_PERMADDNGP', 'All parent items must be selected.');
+define("_AM_GARAGES_GPERM_G_ADD" , "Can add" ) ;
+define("_AM_GARAGES_CAT2GROUPDESC" , "Check categories which you allow to access" ) ;
+define("_AM_GARAGES_GROUPPERMDESC" , "Select group(s) allowed to submit listings." ) ;
+define("MI_GARAGES_GROUPPERM", "Submit Permissions");
+define("_AM_GARAGES_SUBMITFORM", "Submit Permissions");
+define("_AM_GARAGES_SUBMITFORM_DESC", "Select, who can submit a listing");
+define("_AM_GARAGES_VIEWFORM", "View Permissions");
+define("_AM_GARAGES_VIEWFORM_DESC", "Select, who can view listings");
 ?>

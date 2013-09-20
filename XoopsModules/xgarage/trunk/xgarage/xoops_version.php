@@ -3,7 +3,7 @@
 global $xoopsModuleConfig;
 
 $modversion['name'] = _MI_NAME;
-$modversion['version'] = 0.2;
+$modversion['version'] = .03;
 $modversion['description'] = _MI_DESC;
 $modversion['credits'] = 'www.calibernation.com / www.xgarage.org / www.jlmzone.com';
 $modversion['author'] = 'Northern, script_fu, jlm69';
@@ -15,7 +15,7 @@ $modversion['dirname'] = 'garage';
 
 // Menu
 $modversion['hasMain'] = 1;
-if($xoopsModuleConfig['canusersubmit']){
+if (isset($xoopsModuleConfig['canusersubmit']) == 1){
 	$modversion['sub'][1]['name'] = _MI_SUBMIT;
 	$modversion['sub'][1]['url'] = "garage.php?op=add";
 }
@@ -25,7 +25,7 @@ $modversion['comments']['pageName'] = 'index.php';
 $modversion['comments']['itemName'] = 'gid';
 
 
-// Admin 
+// Admin things
 $modversion['hasAdmin']		= 1;
 $modversion['adminindex']	= "admin/index.php";
 $modversion['adminmenu']	= "admin/menu.php";
@@ -221,5 +221,68 @@ $modversion['config'][18]['description'] = '_MI_LIST_D';
 $modversion['config'][18]['formtype'] = 'textbox';
 $modversion['config'][18]['valuetype'] = 'string';
 $modversion['config'][18]['default'] = _MI_LIST;
+
+// Use WYSIWYG Editors? 
+
+$modversion['config'][19]['name'] = 'form_options';
+$modversion['config'][19]['title'] = '_MI_EDITOR';
+$modversion['config'][19]['description'] = '_MI_LIST_EDITORS';
+$modversion['config'][19]['formtype'] = 'select';
+$modversion['config'][19]['valuetype'] = 'text';
+$modversion['config'][19]['default'] = 'dhtml';
+$modversion['config'][19]['options'] = array( 'DHTML editor' => 'dhtml', 'Spaw editor' => 'spaw',
+'HtmlArea Editor' => 'htmlarea', 'Koivi editor' => 'koivi', 'FCK Editor' => 'fckeditor', 'Inbetween' => 'inbetween',
+'TinyEditor' => 'tiny');
+
+
+
+//Notification
+$modversion['hasNotification'] = 1;
+
+$modversion['notification']['lookup_file'] = 'include/notification.inc.php';
+$modversion['notification']['lookup_func'] = 'garage_notify_iteminfo';
+
+$modversion['notification']['category'][1]['name'] = 'global';
+$modversion['notification']['category'][1]['title'] = _MI_GARAGE_GLOBAL_NOTIFY;
+$modversion['notification']['category'][1]['description'] = _MI_GARAGE_GLOBAL_NOTIFYDSC;
+$modversion['notification']['category'][1]['subscribe_from'] = 'index.php';
+
+//category
+$modversion['notification']['category'][2]['name'] = 'category';
+$modversion['notification']['category'][2]['title'] = _MI_GARAGE_CATEGORY_NOTIFY;
+$modversion['notification']['category'][2]['description'] = _MI_GARAGE_CATEGORY_NOTIFYDSC;
+$modversion['notification']['category'][2]['subscribe_from'] = 'index.php';
+$modversion['notification']['category'][2]['item_name'] = 'cid';
+$modversion['notification']['category'][2]['allow_bookmark'] = 0;
+$modversion['notification']['category'][2]['extraParams'] = array('op');
+
+$modversion['notification']['category'][3]['name'] = 'listing';
+$modversion['notification']['category'][3]['title'] = _MI_GARAGE_NOTIFY;
+$modversion['notification']['category'][3]['description'] = _MI_GARAGE_NOTIFYDSC;
+$modversion['notification']['category'][3]['subscribe_from'] = 'index.php';
+$modversion['notification']['category'][3]['item_name'] = 'id';
+$modversion['notification']['category'][3]['allow_bookmark'] = 0;
+$modversion['notification']['category'][3]['extraParams'] = array('op');
+
+//event
+//garage notifications new listings in this category
+$modversion['notification']['event'][1]['name'] = 'new_listing';
+$modversion['notification']['event'][1]['category'] = 'category';
+$modversion['notification']['event'][1]['title'] = _MI_GARAGE_NEWPOST_NOTIFY;
+$modversion['notification']['event'][1]['caption'] = _MI_GARAGE_NEWPOST_NOTIFYCAP;
+$modversion['notification']['event'][1]['description'] = _MI_GARAGE_NEWPOST_NOTIFYDSC;
+$modversion['notification']['event'][1]['mail_template'] = 'listing_newpost_notify';
+$modversion['notification']['event'][1]['mail_subject'] = _MI_GARAGE_NEWPOST_NOTIFYSBJ;
+ 
+//new listings in all categories posted
+$modversion['notification']['event'][2]['name'] = 'new_listing';
+$modversion['notification']['event'][2]['category'] = 'global';
+$modversion['notification']['event'][2]['title'] = _MI_GARAGE_GLOBAL_NEWPOST_NOTIFY;
+$modversion['notification']['event'][2]['caption'] = _MI_GARAGE_GLOBAL_NEWPOST_NOTIFYCAP;
+$modversion['notification']['event'][2]['description'] = _MI_GARAGE_GLOBAL_NEWPOST_NOTIFYDSC;
+$modversion['notification']['event'][2]['mail_template'] = 'listing_newpost_notify';
+$modversion['notification']['event'][2]['mail_subject'] = _MI_GARAGE_GLOBAL_NEWPOST_NOTIFYSBJ;
+
+
 
 ?>

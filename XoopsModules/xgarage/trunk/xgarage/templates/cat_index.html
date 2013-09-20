@@ -4,9 +4,9 @@
 <{if $panel == true}>
 	<{if $adminlink}><a href="../../modules/garage/admin/index.php"><img src="images/icons/admin.png" align="middle" title="[<{$adminlink}>]" alt="[<{$adminlink}>]"></a><{/if}>
 <{/if}>
-<{if $itemTotal}><{$itemTotal}><{/if}>
-</div>
-<{if $path}><{$path}><{/if}>
+<{if $itemTotal}><br /><{$itemTotal}><{/if}>
+</div><br />
+<{if $path}><br /><{$path}><{/if}>
 <{if $cats}>
 	<{foreach item=cat from=$cats}>
 		<div style="margin-left:75px;"><a href="index.php?cid=<{$cat.cid}>"><{$cat.name}>(<{$cat.count}>)</a></div>
@@ -19,4 +19,6 @@
 		<div style="margin-left:100px;"><a href="index.php?op=view&gid=<{$name.id}>"><{$name.name}></a></div>
 	<{/foreach}>
 <{/if}>
-
+<br /><br />
+<{include file="db:system_notification_select.html"}>
+<br /><br />
