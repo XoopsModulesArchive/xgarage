@@ -13,19 +13,19 @@
 <p>XOOPS - <a href="http://www.xoops.org/">http://www.xoops.org/ </a></p>
 <p>Script_fu - for his encouragement to get this module done. </p>
 <p>gtop00 - thanks for the debaits, on how we should get this working. </p>
-<p>exbanious - You inspired many to make or ask for a agarage module. </p>
+<p>exbanious - You inspired many to make or ask for a garage module. </p>
 <p>Mudnuts4x4 - he was the original person to ask for a module like the phpBB garage,<br>
  Sorry, its not phpbb, but its close, without a lawsuite. and its original to xoops, and no-one else.</p>
 
 <p><br>
-  <strong>Translators:</strong></p>
+<strong>Translators:</strong></p>
 <p>English - Northern <br>
-  German - <br>
-  Japanese - <br>
+German - <br>
+Japanese - <br>
 Portuguese - <br>
 Greek - <br>
 French - <br>
-Dutch -<br>
+Dutch - <br>
 Danish - <br>
 </p>
 <p>&nbsp;</p>

@@ -3,10 +3,10 @@
 global $xoopsModuleConfig;
 
 $modversion['name'] = _MI_NAME;
-$modversion['version'] = 1.1;
+$modversion['version'] = 0.2;
 $modversion['description'] = _MI_DESC;
-$modversion['credits'] = 'www.calibernation.com / www.xgarage.org';
-$modversion['author'] = 'Northern, script_fu';
+$modversion['credits'] = 'www.calibernation.com / www.xgarage.org / www.jlmzone.com';
+$modversion['author'] = 'Northern, script_fu, jlm69';
 $modversion['help'] = 'docs';
 $modversion['license'] = 'GPL';
 $modversion['official'] = 0;
@@ -25,7 +25,7 @@ $modversion['comments']['pageName'] = 'index.php';
 $modversion['comments']['itemName'] = 'gid';
 
 
-// Admin things
+// Admin 
 $modversion['hasAdmin']		= 1;
 $modversion['adminindex']	= "admin/index.php";
 $modversion['adminmenu']	= "admin/menu.php";

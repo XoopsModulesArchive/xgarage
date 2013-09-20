@@ -33,7 +33,7 @@ switch ($op){
 		}
 		$myts =& MyTextSanitizer::getInstance(); // MyTextSanitizer object
 		$garage['mengine'] = $myts->displayTarea($garage['mengine'], 0, 1, 1, 1, 1);
-		$garage['meterior'] = $myts->displayTarea($garage['meterior'], 0, 1, 1, 1, 1);
+		$garage['mexterior'] = $myts->displayTarea($garage['mexterior'], 0, 1, 1, 1, 1);
 		$garage['minterior'] = $myts->displayTarea($garage['minterior'], 0, 1, 1, 1, 1);
 		$garage['mrims'] = $myts->displayTarea($garage['mrims'], 0, 1, 1, 1, 1);
 		$garage['maudio'] = $myts->displayTarea($garage['maudio'], 0, 1, 1, 1, 1);
@@ -45,7 +45,7 @@ switch ($op){
 		} 
 		$garage['image'] = $myts->displayTarea($garage['image'], 0, 0, 1, 1, 0);
 		$garage['location'] = $myts->displayTarea($garage['location'], 0, 0, 0, 0, 0);
-		$garage['mark'] = $myts->displayTarea($garage['mark'], 0, 0, 0, 0, 0);
+		$garage['make'] = $myts->displayTarea($garage['make'], 0, 0, 0, 0, 0);
 		$garage['model'] = $myts->displayTarea($garage['model'], 0, 0, 0, 0, 0);
 		$garage['year'] = $myts->displayTarea($garage['year'], 0, 0, 0, 0, 0);
 		$garage['engine'] = $myts->displayTarea($garage['engine'], 0, 0, 0, 0, 0);
@@ -115,7 +115,7 @@ switch ($op){
 		$xoopsTpl->assign('list', $xoopsModuleConfig['listname']);
 		$xoopsTpl->assign('website', _MD_XG_PWEBSITE);
 		$xoopsTpl->assign('location', _MD_XG_PLOCATION);
-		$xoopsTpl->assign('mark', _MD_XG_MARK);
+		$xoopsTpl->assign('make', _MD_XG_MAKE);
 		$xoopsTpl->assign('model', _MD_XG_MODEL);
 		$xoopsTpl->assign('year', _MD_XG_YEAR);
 		$xoopsTpl->assign('engine', _MD_XG_ENGINE);
@@ -131,7 +131,7 @@ switch ($op){
 		$xoopsTpl->assign('linkgarage', _MD_XG_USERGARAGE);
 		$xoopsTpl->assign('index',_MD_XG_INDEX);
 		$xoopsTpl->assign('mengine',_MD_XG_MENGINE);
-		$xoopsTpl->assign('meterior',_MD_XG_METERIOR);
+		$xoopsTpl->assign('mexterior',_MD_XG_MEXTERIOR);
 		$xoopsTpl->assign('minterior',_MD_XG_MINTERIOR);
 		$xoopsTpl->assign('mrims',_MD_XG_MRIMS);
 		$xoopsTpl->assign('maudio',_MD_XG_MAUDIO);
