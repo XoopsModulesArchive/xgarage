@@ -36,7 +36,7 @@ define("_MI_IMGHEIGHTDSC","This is in pixels.");
 define("_MI_USECATS","Would you like to enable categories system?");
 define("_MI_USECATSDESC","This will allow garage to be part of a category tree.");
 define("_MI_MULTIPLEGARAGE","Can users maintain multiple garage?");
-define("_MI_MULTIPLEGARAGEDESC","If this is set to no, then users can only have 1 garage each.");
+define("_MI_MULTIPLEPROFSDESC","If this is set to no, then users can only have 1 garage each.");
 define("_MI_ADDIMAGES","Would you like image URL/image upload to be part of ADDING a garage?");
 define("_MI_ADDIMAGESDESC","If this is set to NO, then users can only add images in EDIT mode (after add).");
 define("_MI_LINKGARAGE","Can the user link to their XOOPS garage?");
@@ -46,7 +46,54 @@ define("_MI_USEDESCRIPT2DESC","If this is set to YES, then garage can have addit
 define("_MI_LIST","Featuring");
 define("_MI_LIST_T","List Name");
 define("_MI_LIST_D","What to name the list feature for your application. <br/>Example: Members, Highlights, Features, Interests, Details, Skills, Abilities, Credentials, Experience, Qualifications, Education");
+define("_MI_EDITOR","Editor to use:");
+define("_MI_LIST_EDITORS","Select the editor to use.");
 
 
+
+// Notification event descriptions and mail templates
+
+
+define ('_MI_GARAGE_CATEGORY_NOTIFY', 'Category'); 
+define ('_MI_GARAGE_CATEGORY_NOTIFYDSC', 'Notification options that apply to the current category.');
+define ('_MI_GARAGE_NOTIFY', 'Listing'); 
+define ('_MI_GARAGE_NOTIFYDSC', 'Notification options that apply to the current listing.');	
+define ('_MI_GARAGE_GLOBAL_NOTIFY', 'Whole Module ');
+define ('_MI_GARAGE_GLOBAL_NOTIFYDSC', 'Global advert notification options.');
+
+//event
+
+define ('_MI_GARAGE_NEWPOST_NOTIFY', 'New Listing');
+define ('_MI_GARAGE_NEWPOST_NOTIFYCAP', 'Notify me of new listings in the current category.');
+define ('_MI_GARAGE_NEWPOST_NOTIFYDSC', 'Receive notification when a new listing is posted to the current category.');
+define ('_MI_GARAGE_NEWPOST_NOTIFYSBJ', '[{X_SITENAME}] {X_MODULE}: auto-notify : New listing in category');
+define ('_MI_GARAGE_VALIDATE_NEWPOST_NOTIFY', 'New Listing');
+define ('_MI_GARAGE_VALIDATE_NEWPOST_NOTIFYCAP', 'Notify me of new listings in the current category.');
+define ('_MI_GARAGE_VALIDATE_NEWPOST_NOTIFYDSC', 'Receive notification when a new listing is posted to the current category.');
+define ('_MI_GARAGE_VALIDATE_NEWPOST_NOTIFYSBJ', '[{X_SITENAME}] {X_MODULE}: auto-notify : New listing in category');
+define ('_MI_GARAGE_UPDATE_NEWPOST_NOTIFY', 'Listing Updated');
+define ('_MI_GARAGE_UPDATE_NEWPOST_NOTIFYCAP', 'Notify me of updated listings in the current category.');
+define ('_MI_GARAGE_UPDATE_NEWPOST_NOTIFYDSC', 'Receive notification when an listing is updated in the current category.');
+define ('_MI_GARAGE_UPDATE_NEWPOST_NOTIFYSBJ', '[{X_SITENAME}] {X_MODULE}: auto-notify : New listing in category');
+define ('_MI_GARAGE_DELETE_NEWPOST_NOTIFY', 'Listing Deleted');
+define ('_MI_GARAGE_DELETE_NEWPOST_NOTIFYCAP', 'Notify me of new listings in the current category.');
+define ('_MI_GARAGE_DELETE_NEWPOST_NOTIFYDSC', 'Receive notification when an listing is deleted from the current category.');
+define ('_MI_GARAGE_DELETE_NEWPOST_NOTIFYSBJ', '[{X_SITENAME}] {X_MODULE}: auto-notify : New listing in category');
+define ('_MI_GARAGE_GLOBAL_NEWPOST_NOTIFY', 'New Listing');
+define ('_MI_GARAGE_GLOBAL_NEWPOST_NOTIFYCAP', 'Notify me of new listings in all categories.');
+define ('_MI_GARAGE_GLOBAL_NEWPOST_NOTIFYDSC', 'Receive notification when a new listing is posted to all categories.');
+define ('_MI_GARAGE_GLOBAL_NEWPOST_NOTIFYSBJ', '[{X_SITENAME}] {X_MODULE}: auto-notify : New listing in category');
+define ('_MI_GARAGE_GLOBAL_VALIDATE_NEWPOST_NOTIFY', 'New Listing');
+define ('_MI_GARAGE_GLOBAL_VALIDATE_NEWPOST_NOTIFYCAP', 'Notify me of new listings in all categories.');
+define ('_MI_GARAGE_GLOBAL_VALIDATE_NEWPOST_NOTIFYDSC', 'Receive notification when a new listing is posted to all categories.');
+define ('_MI_GARAGE_GLOBAL_VALIDATE_NEWPOST_NOTIFYSBJ', '[{X_SITENAME}] {X_MODULE}: auto-notify : New listing in category');
+define ('_MI_GARAGE_GLOBAL_UPDATE_NEWPOST_NOTIFY', 'Listing Updated');
+define ('_MI_GARAGE_GLOBAL_UPDATE_NEWPOST_NOTIFYCAP', 'Notify me of updated listings in all categories.');
+define ('_MI_GARAGE_GLOBAL_UPDATE_NEWPOST_NOTIFYDSC', 'Receive notification when an listing is updated in all categories.');
+define ('_MI_GARAGE_GLOBAL_UPDATE_NEWPOST_NOTIFYSBJ', '[{X_SITENAME}] {X_MODULE}: auto-notify : Listing updated in categories');
+define ('_MI_GARAGE_GLOBAL_DELETE_NEWPOST_NOTIFY', 'Listing Deleted');
+define ('_MI_GARAGE_GLOBAL_DELETE_NEWPOST_NOTIFYCAP', 'Notify me of deleted listings in all categories.');
+define ('_MI_GARAGE_GLOBAL_DELETE_NEWPOST_NOTIFYDSC', 'Receive notification when an listing is deleted in all categories.');
+define ('_MI_GARAGE_GLOBAL_DELETE_NEWPOST_NOTIFYSBJ', '[{X_SITENAME}] {X_MODULE}: auto-notify : Listing deleted in categories');
 
 ?>

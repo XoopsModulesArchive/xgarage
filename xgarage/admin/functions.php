@@ -1,7 +1,7 @@
 <?php
 function getCats($gid){
 	global $xoopsDB;
-	$sql = ("SELECT cid,name FROM " . $xoopsDB->prefix("garage_cats") . " WHERE gid = '$gid' ORDER BY name");
+	$sql = "SELECT cid,name FROM " . $xoopsDB->prefix("garage_cats") . " WHERE gid = '$gid' ORDER BY name";
 		if ( !$result = $xoopsDB->query($sql) ) {
 			exit("$sql > SQL Error in function :: getCats($gid)");
 		} else {
@@ -14,7 +14,7 @@ function getCats($gid){
 }
 function getName($cid){
 	global $xoopsDB;
-	$sql = "SELECT name FROM " . $xoopsDB->prefix("garage_cats") . " WHERE cid = $cid";
+	$sql = "SELECT name FROM " . $xoopsDB->prefix("garage_cats") . " WHERE cid = '$cid'";
 		if ( !$result = $xoopsDB->query($sql) ) {
 			exit("$sql > SQL Error in function :: getName($cid)");
 		} else {
@@ -23,20 +23,21 @@ function getName($cid){
 			return ($name);
 		}
 }
-function addCat($name,$gid) {
+function addCat($name,$gid){
 	global $xoopsDB;
-	$sql = $xoopsDB->query("INSERT INTO ".$xoopsDB->prefix("garage_cats")." VALUES ('','$name','$gid')");
-		if (!$result = $sql) {
+	$sql = "INSERT INTO  " . $xoopsDB->prefix("garage_cats") . " (name,gid) VALUES ('$name',$gid)";
+		if ( !$result = $xoopsDB->query($sql) ) {
 			exit("$sql > SQL Error in function :: addCat($name,$gid)");
 			return 0;
-		}else{
+		} else {
 			return 1;
 		}
+	
 }
 
 function moveCat($cid,$gid){
 	global $xoopsDB;
-	$sql = "UPDATE  " . $xoopsDB->prefix("garage_cats") . " SET gid = $gid WHERE cid = $cid";
+	$sql = "UPDATE  " . $xoopsDB->prefix("garage_cats") . " SET gid = $gid WHERE cid = '$cid'";
 		if ( !$result = $xoopsDB->query($sql) ) {
 			exit("$sql > SQL Error in function :: moveCat($cid,$gid)");
 			return 0;
@@ -48,7 +49,7 @@ function moveCat($cid,$gid){
 
 function check4Content($cid){
 	global $xoopsDB;
-	$sql = "SELECT  count(*) as count FROM " . $xoopsDB->prefix("garage") . " WHERE cid = $cid";
+	$sql = "SELECT  count(*) as count FROM " . $xoopsDB->prefix("garage") . " WHERE cid = '$cid'";
 		if ( !$result = $xoopsDB->query($sql) ) {
 			exit("$sql > SQL Error in function :: check4Content($cid)");
 			return 0;
@@ -61,7 +62,7 @@ function check4Content($cid){
 
 function renameCat($cid,$catname){
 	global $xoopsDB;
-	$sql = "UPDATE  " . $xoopsDB->prefix("garage_cats") . " SET name = '$catname' WHERE cid = $cid";
+	$sql = "UPDATE  " . $xoopsDB->prefix("garage_cats") . " SET name = '$catname' WHERE cid = '$cid'";
 		if ( !$result = $xoopsDB->query($sql) ) {
 			exit("$sql > SQL Error in function :: renameCat($cid,$catname)");
 			return 0;
@@ -72,7 +73,7 @@ function renameCat($cid,$catname){
 
 function approveGarage($gid){
 	global $xoopsDB;
-	$sql = "UPDATE " . $xoopsDB->prefix("garage") . " SET approved=1 WHERE id = $gid";
+	$sql = "UPDATE " . $xoopsDB->prefix("garage") . " SET approved=1 WHERE id = '$gid'";
 		if ( !$result = $xoopsDB->queryF($sql) ) {
 			exit("$sql > SQL Error in function :: approveGarage($gid)");
 		} else {
@@ -82,7 +83,7 @@ function approveGarage($gid){
 
 function disableGarage($gid){
 	global $xoopsDB;
-	$sql = "UPDATE " . $xoopsDB->prefix("garage") . " SET disabled=1 WHERE id = $gid";
+	$sql = "UPDATE " . $xoopsDB->prefix("garage") . " SET disabled=1 WHERE id = '$gid'";
 		if ( !$result = $xoopsDB->queryF($sql) ) {
 			exit("$sql > SQL Error in function :: disableGarage($gid)");
 		} else {
@@ -92,7 +93,7 @@ function disableGarage($gid){
 
 function enableGarage($gid){
 	global $xoopsDB;
-	$sql = "UPDATE " . $xoopsDB->prefix("garage") . " SET disabled=0 WHERE id = $gid";
+	$sql = "UPDATE " . $xoopsDB->prefix("garage") . " SET disabled=0 WHERE id = '$gid'";
 		if ( !$result = $xoopsDB->queryF($sql) ) {
 			exit("$sql > SQL Error in function :: enableGarage($gid)");
 		} else {
@@ -101,7 +102,7 @@ function enableGarage($gid){
 }
 function getActiveGarages(){
 	global $xoopsDB;
-	$sql = ("SELECT id,name,viewable FROM " . $xoopsDB->prefix("garage") . " WHERE disabled=0 AND approved=1 ORDER BY name");
+	$sql = ("SELECT id,name,viewable FROM " . $xoopsDB->prefix("garage") . " WHERE disabled='0' AND approved='1' ORDER BY name");
 	$result=$xoopsDB->query($sql);
 	$rows = array();
 	while($row = $xoopsDB->fetchArray($result)) {
@@ -112,7 +113,7 @@ function getActiveGarages(){
 
 function getNewGarages(){
 	global $xoopsDB;
-	$sql = ("SELECT id,name FROM " . $xoopsDB->prefix("garage") . " WHERE approved=0 ORDER BY name");
+	$sql = ("SELECT id,name FROM " . $xoopsDB->prefix("garage") . " WHERE approved='0' ORDER BY name");
 	$result=$xoopsDB->query($sql);
 	$rows = array();
 	while($row = $xoopsDB->fetchArray($result)) {
@@ -123,7 +124,7 @@ function getNewGarages(){
 
 function getDisabledGarages(){
 	global $xoopsDB;
-	$sql = ("SELECT id,name FROM " . $xoopsDB->prefix("garage") . " WHERE disabled=1 ORDER BY name");
+	$sql = ("SELECT id,name FROM " . $xoopsDB->prefix("garage") . " WHERE disabled='1' ORDER BY name");
 	$result=$xoopsDB->query($sql);
 	$rows = array();
 	while($row = $xoopsDB->fetchArray($result)) {
@@ -177,6 +178,7 @@ function adminMenu ($currentoption = 0, $breadcrumb = '')
 	echo "<li id='" . $tblColors[2] . "'><a href=\"index.php?op=view_new\"><span>" . _AM_GARAGES_APPROVE . "</span></a></li>";
 	echo "<li id='" . $tblColors[3] . "'><a href=\"index.php?op=view_disabled\"><span>" . _AM_GARAGES_DISABLED . "</span></a></li>";
 	echo "<li id='" . $tblColors[4] . "'><a href=\"index.php?op=cats\"><span>" . _AM_GARAGES_CATEGORIES . "</span></a></li>";
+	echo "<li id='" . $tblColors[5] . "'><a href=\"garageperms.php\"><span>" . _AM_GARAGES_PERMISSIONS . "</span></a></li>";
 	echo "</ul></div>";
 }
 
