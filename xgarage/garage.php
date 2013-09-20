@@ -9,7 +9,7 @@ settype($url, "string");
 settype($name, "string");
 settype($image, "string");
 settype($location, "string");
-settype($mark, "string");
+settype($make, "string");
 settype($model, "string");
 settype($year, "string");
 settype($engine, "string");
@@ -24,7 +24,7 @@ settype($quart, "string");
 settype($quartm, "string");
 settype($list, "string");
 settype($mengine, "string");
-settype($meterior, "string");
+settype($mexterior, "string");
 settype($minterior, "string");
 settype($mrims, "string");
 settype($maudio, "string");
@@ -79,7 +79,7 @@ switch ($op){
 			
 			$url = $myts->makeTboxData4Save($_POST['url']);
 			$location = $myts->makeTboxData4Save($_POST['location']);
-			$mark = $myts->makeTboxData4Save($_POST['mark']);
+			$make = $myts->makeTboxData4Save($_POST['make']);
 			$model = $myts->makeTboxData4Save($_POST['model']);
 			$year = $myts->makeTboxData4Save($_POST['year']);
 			$engine = $myts->makeTboxData4Save($_POST['engine']);
@@ -94,7 +94,7 @@ switch ($op){
 			$quartm = $myts->makeTboxData4Save($_POST['quartm']);
 			$list = $myts->makeTboxData4Save($_POST['list']);
 			$mengine = $myts->makeTareaData4Save($_POST['mengine']);
-			$meterior = $myts->makeTareaData4Save($_POST['meterior']);
+			$mexterior = $myts->makeTareaData4Save($_POST['mexterior']);
 			$minterior = $myts->makeTareaData4Save($_POST['minterior']);
 			$mrims = $myts->makeTareaData4Save($_POST['mrims']);
 			$maudio = $myts->makeTareaData4Save($_POST['maudio']);
@@ -106,7 +106,7 @@ switch ($op){
 			
 			include("image_uploader.php");
 			
-			$success = addGarage($a,$uid,$cid,$name,$image,$imageupload,$imagechoice,$url,$location,$mark,$model,$year,$engine,$color,$rt,$sixty,$three,$eigth,$eigthm,$thou,$quart,$quartm,$list,$mengine,$meterior,$minterior,$mrims,$maudio,$mfuture,$descript2,$linkgarage);
+			$success = addGarage($a,$uid,$cid,$name,$image,$imageupload,$imagechoice,$url,$location,$make,$model,$year,$engine,$color,$rt,$sixty,$three,$eigth,$eigthm,$thou,$quart,$quartm,$list,$mengine,$mexterior,$minterior,$mrims,$maudio,$mfuture,$descript2,$linkgarage);
 			if($success) redirect_header("index.php",2,_MD_XG_ADDSUCCESS);
 			else redirect_header("index.php",2,_MD_XG_ADDFAILURE);
 		} else redirect_header("index.php",2,_MD_XG_ADDFAILURE);
@@ -133,7 +133,7 @@ switch ($op){
 		if(!$imagechoice) $imagechoice = "0";
 		$url = $myts->makeTboxData4Save($_POST['url']);
 		$location = $myts->makeTboxData4Save($_POST['location']);
-		$mark = $myts->makeTboxData4Save($_POST['mark']);
+		$make = $myts->makeTboxData4Save($_POST['make']);
 		$model = $myts->makeTboxData4Save($_POST['model']);
 		$year = $myts->makeTboxData4Save($_POST['year']);
 		$engine = $myts->makeTboxData4Save($_POST['engine']);
@@ -148,7 +148,7 @@ switch ($op){
 		$quartm = $myts->makeTboxData4Save($_POST['quartm']);
 		$list = $myts->makeTboxData4Save($_POST['list']);
 		$mengine = $myts->makeTareaData4Save($_POST['mengine']);
-		$meterior = $myts->makeTareaData4Save($_POST['meterior']);
+		$mexterior = $myts->makeTareaData4Save($_POST['mexterior']);
 		$minterior = $myts->makeTareaData4Save($_POST['minterior']);
 		$mrims = $myts->makeTareaData4Save($_POST['mrims']);
 		$maudio = $myts->makeTareaData4Save($_POST['maudio']);
@@ -163,8 +163,8 @@ switch ($op){
 		if($errmsg) $wtime = 15;
 		else $wtime = 3;
 		if(($uid == $puid && $xoopsModuleConfig['canuseredit']) || $userIsAdmin){
-			if($msg) $success = updateGaragePlusUpload($gid,$ouid,$cid,$viewable,$name,$image,$uploadimage,$imagechoice,$url,$location,$mark,$model,$year,$engine,$color,$rt,$sixty,$three,$eigth,$eigthm,$thou,$quart,$quartm,$list,$mengine,$meterior,$minterior,$mrims,$maudio,$mfuture,$descript2,$linkgarage);
-			else $success = updateGarage($gid,$ouid,$cid,$viewable,$name,$image,$imagechoice,$url,$location,$mark,$model,$year,$engine,$color,$rt,$sixty,$three,$eigth,$eigthm,$thou,$quart,$quartm,$list,$mengine,$meterior,$minterior,$mrims,$maudio,$mfuture,$descript2,$linkgarage);
+			if($msg) $success = updateGaragePlusUpload($gid,$ouid,$cid,$viewable,$name,$image,$uploadimage,$imagechoice,$url,$location,$make,$model,$year,$engine,$color,$rt,$sixty,$three,$eigth,$eigthm,$thou,$quart,$quartm,$list,$mengine,$mexterior,$minterior,$mrims,$maudio,$mfuture,$descript2,$linkgarage);
+			else $success = updateGarage($gid,$ouid,$cid,$viewable,$name,$image,$imagechoice,$url,$location,$make,$model,$year,$engine,$color,$rt,$sixty,$three,$eigth,$eigthm,$thou,$quart,$quartm,$list,$mengine,$mexterior,$minterior,$mrims,$maudio,$mfuture,$descript2,$linkgarage);
 
 			if($success) redirect_header("index.php?op=view&gid=$gid",$wtime,_MD_XG_UPDATESUCCESS.$errmsg.$msg);
 			else redirect_header("index.php?op=view&gid=$gid",$wtime,_MD_XG_UPDATEFAILURE.$errmsg.$msg);
@@ -227,7 +227,7 @@ switch ($op){
 		}
 		$sform->addElement(new XoopsFormText(_MD_XG_URL, 'url', 50, 255, $url), false);
 		$sform->addElement(new XoopsFormText(_MD_XG_LOCATION, 'location', 50, 75, $location), false);
-		$sform->addElement(new XoopsFormText(_MD_XG_MARK, 'mark', 50, 75, $mark), false);
+		$sform->addElement(new XoopsFormText(_MD_XG_MAKE, 'make', 50, 75, $make), false);
 		$sform->addElement(new XoopsFormText(_MD_XG_MODEL, 'model', 50, 75, $model), false);
 		$sform->addElement(new XoopsFormText(_MD_XG_YEAR, 'year', 50, 75, $year), false);
 		$sform->addElement(new XoopsFormText(_MD_XG_ENGINE, 'engine', 50, 75, $engine), false);
@@ -242,7 +242,7 @@ switch ($op){
 		$sform->addElement(new XoopsFormText(_MD_XG_QUARTM, 'quartm', 50, 75, $quartm), false);
 		$sform->addElement(new XoopsFormText($xoopsModuleConfig['listname'], 'list', 50, 255, $list), false);
 		$sform->addElement(new XoopsFormDhtmlTextArea(_MD_XG_MENGINE, 'mengine', $mengine, 20, 40), true);
-		$sform->addElement(new XoopsFormDhtmlTextArea(_MD_XG_METERIOR, 'meterior', $meterior, 20, 40), true);
+		$sform->addElement(new XoopsFormDhtmlTextArea(_MD_XG_MEXTERIOR, 'mexterior', $mexterior, 20, 40), true);
 		$sform->addElement(new XoopsFormDhtmlTextArea(_MD_XG_MINTERIOR, 'minterior', $minterior, 20, 40), true);
 		$sform->addElement(new XoopsFormDhtmlTextArea(_MD_XG_MRIMS, 'mrims', $mrims, 20, 40), true);
 		$sform->addElement(new XoopsFormDhtmlTextArea(_MD_XG_MAUDIO, 'maudio', $maudio, 20, 40), true);
@@ -276,7 +276,7 @@ switch ($op){
 		$imagechoice = $garage['imagechoice'];
 		$url = $garage['url'];
 		$location = $garage['location'];
-		$mark = $garage['mark'];
+		$make = $garage['make'];
 		$model = $garage['model'];
 		$year = $garage['year'];
 		$engine = $garage['engine'];
@@ -291,7 +291,7 @@ switch ($op){
 		$quartm = $garage['quartm'];
 		$list = $garage['list'];
 		$mengine = $garage['mengine'];
-		$meterior = $garage['meterior'];
+		$mexterior = $garage['mexterior'];
 		$minterior = $garage['minterior'];
 		$mrims = $garage['mrims'];
 		$maudio = $garage['maudio'];
@@ -335,7 +335,7 @@ switch ($op){
 			} 
 			$sform->addElement(new XoopsFormText(_MD_XG_URL, 'url', 50, 255, $url), false);
 			$sform->addElement(new XoopsFormText(_MD_XG_LOCATION, 'location', 50, 75, $location), false);
-			$sform->addElement(new XoopsFormText(_MD_XG_MARK, 'mark', 50, 75, $mark), false);
+			$sform->addElement(new XoopsFormText(_MD_XG_MAKE, 'make', 50, 75, $make), false);
 			$sform->addElement(new XoopsFormText(_MD_XG_MODEL, 'model', 50, 75, $model), false);
 			$sform->addElement(new XoopsFormText(_MD_XG_YEAR, 'year', 50, 75, $year), false);
 			$sform->addElement(new XoopsFormText(_MD_XG_ENGINE, 'engine', 50, 75, $engine), false);
@@ -350,7 +350,7 @@ switch ($op){
 			$sform->addElement(new XoopsFormText(_MD_XG_QUARTM, 'quartm', 50, 75, $quartm), false);
 			$sform->addElement(new XoopsFormText($xoopsModuleConfig['listname'], 'list', 50, 255, $list), false);
 			$sform->addElement(new XoopsFormDhtmlTextArea(_MD_XG_MENGINE, 'mengine', $mengine, 20, 40), true);
-			$sform->addElement(new XoopsFormDhtmlTextArea(_MD_XG_METERIOR, 'meterior', $meterior, 20, 40), true);
+			$sform->addElement(new XoopsFormDhtmlTextArea(_MD_XG_MEXTERIOR, 'mexterior', $mexterior, 20, 40), true);
 			$sform->addElement(new XoopsFormDhtmlTextArea(_MD_XG_MINTERIOR, 'minterior', $minterior, 20, 40), true);
 			$sform->addElement(new XoopsFormDhtmlTextArea(_MD_XG_MRIMS, 'mrims', $mrims, 20, 40), true);
 			$sform->addElement(new XoopsFormDhtmlTextArea(_MD_XG_MAUDIO, 'maudio', $maudio, 20, 40), true);

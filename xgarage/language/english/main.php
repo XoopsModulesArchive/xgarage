@@ -82,13 +82,13 @@ define("_MD_XG_ENABLEFAILURE","There was an error with enabling this garage.");
 
 define("_MD_XG_GNAME","Real Name");
 define("_MD_XG_CAR","Vehicle");
-define("_MD_XG_MARK","Car Make");
-define("_MD_XG_MODEL","Car Model");
-define("_MD_XG_YEAR","Car Year");
-define("_MD_XG_ENGINE","Car Engine");
+define("_MD_XG_YEAR","Year");
+define("_MD_XG_MAKE","Make");
+define("_MD_XG_MODEL","Model");
+define("_MD_XG_ENGINE","Engine");
 define("_MD_XG_WHEEL","Wheels/Rims");
 define("_MD_XG_TRANS","Transmission");
-define("_MD_XG_COLOR","Car Color");
+define("_MD_XG_COLOR","Body Color");
 
 define("_MD_XG_RT","R/T");
 define("_MD_XG_SIXTY","60 Foot");
@@ -100,7 +100,7 @@ define("_MD_XG_QUART","1/4 Mile");
 define("_MD_XG_QUARTM","1/4 MPH");
 
 define("_MD_XG_MENGINE","Engine");
-define("_MD_XG_METERIOR","Exterior");
+define("_MD_XG_MEXTERIOR","Exterior");
 define("_MD_XG_MINTERIOR","Interior");
 define("_MD_XG_MRIMS","Rims/Tires");
 define("_MD_XG_MAUDIO","Audio/Video");
