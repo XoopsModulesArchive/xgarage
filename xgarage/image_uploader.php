@@ -1,8 +1,9 @@
 <?php
+			$uploadimage = '';
 		//image uploader
 		if($_FILES['uploadimage']['name'] <> ""){
 			include_once '../../class/uploader.php';
-			
+			$date = time();
 			$upload_path = XOOPS_UPLOAD_PATH . "/" . "garage";
 			if(!is_dir($upload_path)) mkdir($upload_path);
 			$allowed_mimetypes = array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png');
@@ -16,7 +17,7 @@
 					$errmsg = $uploader->getErrors();
 				} else {
 					//echo '<h4>File uploaded successfully!</h4>';
-					$msg = '<h4>'._MD_PR_UPLOADSUCCESS.'</h4>';
+					$msg = '<h4>'._MD_XG_UPLOADSUCCESS.'</h4>';
 					//echo 'Saved as: ' . $uploader->getSavedFileName() . '<br />';
 					$uploadimage = $uploader->getSavedFileName();
 					

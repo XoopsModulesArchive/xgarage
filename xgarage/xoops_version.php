@@ -3,7 +3,7 @@
 global $xoopsModuleConfig;
 
 $modversion['name'] = _MI_NAME;
-$modversion['version'] = .04;
+$modversion['version'] = ".05beta";
 $modversion['description'] = _MI_DESC;
 $modversion['credits'] = 'www.calibernation.com / www.xgarage.org / www.jlmzone.com / www.arabxoops.com';
 $modversion['author'] = 'Northern, script_fu, jlm69, mowaffak';
@@ -15,10 +15,7 @@ $modversion['dirname'] = 'garage';
 
 // Menu
 $modversion['hasMain'] = 1;
-if (isset($xoopsModuleConfig['canusersubmit']) == 1){
-	$modversion['sub'][1]['name'] = _MI_SUBMIT;
-	$modversion['sub'][1]['url'] = "garage.php?op=add";
-}
+
 // Comments
 $modversion['hasComments'] = 1;
 $modversion['comments']['pageName'] = 'index.php';

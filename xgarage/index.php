@@ -1,50 +1,54 @@
 <?php
 //if (!defined('XOOPS_XMLRPC')) define('XOOPS_XMLRPC', 1);
 
-require('header.php');
+include("header.php");
 
-global $xoopsModuleConfig, $xoopsUser;
+$mydirname = basename( dirname( __FILE__ ) ) ;
+global $xoopsModuleConfig, $xoopsModule, $xoopsUser;
+require_once( XOOPS_ROOT_PATH."/modules/$mydirname/include/gtickets.php" ) ;
 
-// Group Permissions added by jlm69
-if($xoopsModuleConfig['usecats']){
+if($xoopsModuleConfig['usecats']) {
+
+$myts =& MyTextSanitizer::getInstance();
+
 
 $module_id = $xoopsModule->getVar('mid');
 
 if (is_object($xoopsUser)) {
-$groups = $xoopsUser->getGroups();
+    $groups = $xoopsUser->getGroups();
 } else {
-$groups = XOOPS_GROUP_ANONYMOUS;
+	$groups = XOOPS_GROUP_ANONYMOUS;
 }
+
 $gperm_handler =& xoops_gethandler('groupperm');
 
 if (isset($_POST['item_id'])) {
-$perm_itemid = intval($_POST['item_id']);
+    $perm_itemid = intval($_POST['item_id']);
 } else {
-$perm_itemid = 0;
+    $perm_itemid = 0;
 }
+
 //If no access
 if (!$gperm_handler->checkRight("garage_view", $perm_itemid, $groups, $module_id)) {
-redirect_header(XOOPS_URL."/index.php", 3, _NOPERM);
-exit();
-		}
-
-	}
+    redirect_header(XOOPS_URL."/index.php", 3, _NOPERM);
+    exit();
+}
+}	
 // End Group Permissions
 
 
 
-//require(XOOPS_ROOT_PATH.'/header.php');
-
+require(XOOPS_ROOT_PATH.'/header.php');
 include("include/functions.php");
 
+
 settype($op,"string");
+settype($subop,"string");//added by jlm69
 settype($uid,"integer");
 settype($garage,"array");
+settype($cats,"array");//added by jlm69
 settype($itemTotal,"string");
-$self = $_SERVER['PHP_SELF'];
-
-global $xoopsModuleConfig;
-global $xoopsUser;
+$self = $_SERVER['PHP_SELF'];//added by jlm69
 
 $userIsAdmin = userIsAdmin($xoopsUser);
 
@@ -60,17 +64,17 @@ switch ($op){
 	case "view":
 		$xoopsOption['template_main'] = "view_garage.html";
 		include XOOPS_ROOT_PATH."/header.php";
-		if($gid){
-			$garage = getGarage($gid);
-			if($garage['imagechoice']) {
-$garage['image'] = "[img align=right]". XOOPS_UPLOAD_URL. "/" . "garage/".$garage['uploadimage']."[/img]";
-		}
-	}
+
 
 		
-		
-		
-		 
+
+
+		if($gid){
+			$garage = getGarage($gid);
+			if($garage['imagechoice'] == 1) {
+$garage['image'] = "[img align=center]". XOOPS_UPLOAD_URL. "/" . "garage/".$garage['uploadimage']."[/img]";
+		}
+	}
 
 		$myts =& MyTextSanitizer::getInstance(); // MyTextSanitizer object
 		$garage['mengine'] = $myts->displayTarea($garage['mengine'], 1, 1, 1, 1, 1);
@@ -128,7 +132,7 @@ $garage['image'] = "[img align=right]". XOOPS_UPLOAD_URL. "/" . "garage/".$garag
 			}
 		}
 
-		$garage['uname'] = xoops_getLinkedUnameFromId($garage['uid']);
+		$garage['uname'] = xoops_getLinkedUnameFromId($garage['uid']);//added by jlm69
 
 		if(($uid == $garage['uid'] && $xoopsModuleConfig['canuseredit']) || ($xoopsModuleConfig['canadminsedit'] && $userIsAdmin)){
 			$xoopsTpl->assign('panel', true);
@@ -144,19 +148,19 @@ $garage['image'] = "[img align=right]". XOOPS_UPLOAD_URL. "/" . "garage/".$garag
 				$xoopsTpl->assign('deletegarage',_MD_XG_DELETEGARAGE);
 			}
 		}
-		
+		$cid = $garage['cid'];
 		if($xoopsModuleConfig['usecats']){
 			include_once XOOPS_ROOT_PATH."/class/xoopstree.php";
 			$cattree = new XoopsTree($xoopsDB->prefix("garage_cats"),"cid","gid");
 			$path = $cattree->getNicePathFromId($cid, "name", $self."?op=default");		
 			$xoopsTpl->assign('path',$path);
-		}
-		
+
+			}	
 		
 		$xoopsTpl->assign('allowcomments', $xoopsModuleConfig['allowcomments']);
 		$xoopsTpl->assign('gid', $gid);
 		$xoopsTpl->assign('gname', _MD_XG_GNAME);
-		$xoopsTpl->assign('ownername', _MD_XG_USERNAME);
+		$xoopsTpl->assign('ownername', _MD_XG_USERNAME);//added by jlm69
 		$xoopsTpl->assign('garage', $garage);
 		$xoopsTpl->assign('list', $xoopsModuleConfig['listname']);
 		$xoopsTpl->assign('website', _MD_XG_PWEBSITE);
@@ -183,14 +187,20 @@ $garage['image'] = "[img align=right]". XOOPS_UPLOAD_URL. "/" . "garage/".$garag
 		$xoopsTpl->assign('mrims',_MD_XG_MRIMS);
 		$xoopsTpl->assign('maudio',_MD_XG_MAUDIO);
 		$xoopsTpl->assign('mfuture',_MD_XG_MFUTURE);
-		$xoopsTpl->assign('garage_of',_MD_XG_GARAGEOF);
-		
+		$xoopsTpl->assign('garage_of',_MD_XG_GARAGEOF);//added by jlm69
+		$xoopsTpl->assign('owner_info',_MD_XG_OWNERINFO);//added by jlm69
+		$xoopsTpl->assign('garage_info',_MD_XG_GARAGE_INFO);//added by jlm69
+		$xoopsTpl->assign('modifications',_MD_XG_MODIFICATIONS);//added by jlm69
+		$xoopsTpl->assign('time_trials',_MD_XG_TIME_TRIALS);//added by jlm69
+		$xoopsTpl->assign('garage_profile',_MD_XG_PROFILE);//added by jlm69
+
 
 		if($xoopsModuleConfig['allowcomments']) include XOOPS_ROOT_PATH.'/include/comment_view.php';		
 		break;
 		
 	case "default":
 	default:
+		
 		$xoopsOption['template_main'] = "cat_index.html";
 		include XOOPS_ROOT_PATH."/header.php";
 		//$xoopsOption['template_main'] = "roster.html";
@@ -217,7 +227,11 @@ $garage['image'] = "[img align=right]". XOOPS_UPLOAD_URL. "/" . "garage/".$garag
 			$path = $cattree->getNicePathFromId($cid, "name", $self."?op=default");		
 			$xoopsTpl->assign('path',$path);
 			$xoopsTpl->assign('cid',$cid);
+			if ($cid != 0) {
+				$xoopsTpl->assign('show_add',true);
+			}
 			$cats = getCats($cid);
+
 			//$xoopsTpl->assign('cats', $cats);
 			for($i=0;$i<count($cats);$i++){
 				//$result = getCount($cats[$i]['cid']);
@@ -229,7 +243,7 @@ $garage['image'] = "[img align=right]". XOOPS_UPLOAD_URL. "/" . "garage/".$garag
 				$xoopsTpl->append('cats', $cats[$i]);
 			}
 			//var_dump($cats);
-		}
+		} else $xoopsTpl->assign('show_add',true);
 
 		$names = getRoster($cid);
 		
