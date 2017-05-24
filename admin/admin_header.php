@@ -22,5 +22,5 @@ if ( file_exists("../language/".$xoopsConfig['language']."/admin.php") ) {
 } else {
 	include("../language/english/admin.php");
 }
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 ?>
