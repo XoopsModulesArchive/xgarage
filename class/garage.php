@@ -17,7 +17,7 @@ class Garage extends XoopsObject
 	function Garage()
 	{
 //required and max length need to be set still
-		$this->db =& Database::getInstance();
+		$this->db = Database::getInstance();
 		$this->initVar('aa', XOBJ_DTYPE_INT, NULL); //approved 
 		$this->initVar('uid', XOBJ_DTYPE_INT, NULL);//uid
 		$this->initVar('cid', XOBJ_DTYPE_INT, NULL);//cid

@@ -5,7 +5,7 @@ $mydirname = basename( dirname( __FILE__ ) ) ;
 
 require_once( XOOPS_ROOT_PATH."/modules/$mydirname/include/gtickets.php" ) ;
 
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 $module_id = $xoopsModule->getVar('mid');
 
 if (is_object($xoopsUser)) {
@@ -97,14 +97,14 @@ if(isset($_POST['op'])) $op = $_POST['op'];
 switch ($op){
 
 	case "preview":
-		$myts =& MyTextSanitizer::getInstance(); // MyTextSanitizer object
+		$myts = MyTextSanitizer::getInstance(); // MyTextSanitizer object
 	break;
 	
 	case "post":
 
 		if($xoopsModuleConfig['canusersubmit'] == 1 || $userIsAdmin == 1){
 			
-			$myts =& MyTextSanitizer::getInstance(); // MyTextSanitizer object
+			$myts = MyTextSanitizer::getInstance(); // MyTextSanitizer object
 			
 			$a = $myts->makeTboxData4Save($_POST['aa']);
 			$cid = $myts->makeTboxData4Save($_POST['cid']);
@@ -177,7 +177,7 @@ $notification_handler->triggerEvent ('listing', $gid, 'new_listing', $tags );
 		//var_dump($_FILES);
 		//var_dump($_POST);
 		
-		$myts =& MyTextSanitizer::getInstance(); // MyTextSanitizer object
+		$myts = MyTextSanitizer::getInstance(); // MyTextSanitizer object
 		
 		$gid = $_POST['gid'];
 		

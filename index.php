@@ -9,7 +9,7 @@ require_once( XOOPS_ROOT_PATH."/modules/$mydirname/include/gtickets.php" ) ;
 
 if($xoopsModuleConfig['usecats']) {
 
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 
 
 $module_id = $xoopsModule->getVar('mid');
@@ -81,7 +81,7 @@ $garage['image'] = "[img align=center]". XOOPS_UPLOAD_URL. "/" . "garage/".$gara
 						redirect_header("index.php",2,'Garage Doesn\'t Exist'); //need a constant for this
 		}
 
-		$myts =& MyTextSanitizer::getInstance(); // MyTextSanitizer object
+		$myts = MyTextSanitizer::getInstance(); // MyTextSanitizer object
 		$garage['mengine'] = $myts->displayTarea($thegarage->getVar('mengine'), 1, 1, 1, 1, 1);
 		$garage['mexterior'] = $myts->displayTarea($thegarage->getVar('mexterior'), 1, 1, 1, 1, 1);
 		$garage['minterior'] = $myts->displayTarea($thegarage->getVar('minterior'), 1, 1, 1, 1, 1);
